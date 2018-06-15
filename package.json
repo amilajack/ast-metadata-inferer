@@ -8,5 +8,8 @@
   "dependencies": {
     "mdn-browser-compat-data": "^0.0.38",
     "nightmare": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0"
   }
 }
