@@ -1,0 +1,12 @@
+{
+  "name": "ast-node-type-verifier",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:amilajack/ast-node-type-verifier.git",
+  "author": "Amila Welihinda <amilaw@nvidia.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mdn-browser-compat-data": "^0.0.38",
+    "nightmare": "^3.0.1"
+  }
+}
