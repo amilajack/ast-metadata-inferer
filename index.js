@@ -13,6 +13,13 @@ for (let i = 0; i < foo.length; i++) {
   // ex. ['alert', 'document', ...]
   const apis = Object.keys(apiObject)
 
+  records.push({
+    apiType: 'js-api',
+    type: 'js-api',
+    protoChain: [apiName],
+    protoChainId: apiName
+  })
+
   for (let j = 0; j < apis.length; j++) {
     records.push({
       apiType: 'js-api',
@@ -232,10 +239,15 @@ export function parallelizeBrowserTests(tests) {
   .then(([first, second]) => first.concat(second));
 }
 
-parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineASTNodeType))
-  .then(e => console.log(e.includes('NewExpression')))
-  .catch(console.log)
-
-parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineIsStatic))
-  // .then(console.log)
-  .catch(console.log)
+Promise.all([
+  parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineASTNodeType)),
+  parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineIsStatic))
+])
+.then(([first, second]) => {
+  return records.map((e, i) => ({
+    ...e,
+    astNodeType: first[i],
+    isStatic: second[i]
+  }))
+})
+.then(console.log)
