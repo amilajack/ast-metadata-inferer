@@ -1,3 +1,4 @@
+import fs from 'fs';
 import Nightmare from 'nightmare';
 import browserCompatData from 'mdn-browser-compat-data';
 
@@ -250,4 +251,4 @@ Promise.all([
     isStatic: second[i]
   }))
 })
-.then(console.log)
+.then(result => fs.promises.writeFile('meta.json', JSON.stringify(result)))

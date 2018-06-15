@@ -12,3 +12,5 @@ const records = [{
 
 astNodeTypeCheck(records)
 ```
+
+**NOTE: ONLY COMPAT WITH NODE 10**
