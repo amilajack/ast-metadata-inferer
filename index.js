@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import Nightmare from 'nightmare';
 import browserCompatData from 'mdn-browser-compat-data';
 
@@ -88,7 +89,7 @@ function formatJSAssertion(record) {
  * ex. ['Array', 'push'] => false
  * ex. ['document', 'querySelector'] => true
  */
-export function determineIsStatic(record) {
+function determineIsStatic(record) {
   return `
     (function () {
       try {
@@ -120,7 +121,7 @@ function formatCSSAssertion(record) {
   `;
 }
 
-export function determineASTNodeType(record) {
+function determineASTNodeType(record) {
   const api = record.protoChain.join('.');
   const { length } = record.protoChain;
 
@@ -157,7 +158,7 @@ export function determineASTNodeType(record) {
  * Get all the supported css values. Evaluation will return an array of camel-cased
  * values.
  */
-export function getAllSupportCSSValues() {
+function getAllSupportCSSValues() {
   return `
     (function () {
       var styles = document.createElement('div').style;
@@ -174,7 +175,7 @@ export function getAllSupportCSSValues() {
  * Get all the supported css properties. Evaluation will return an array of
  * camel-cased properties.
  */
-export function getAllSupportCSSProperties() {
+function getAllSupportCSSProperties() {
   return `
     (function () {
       var properties = document.body.style
@@ -190,7 +191,7 @@ export function getAllSupportCSSProperties() {
 /**
  * Create a list of browser API assertions to check if an API is supported
  */
-export default function AssertionFormatter(record) {
+function AssertionFormatter(record) {
   switch (record.type) {
     case 'css-api':
       return {
@@ -214,7 +215,7 @@ export default function AssertionFormatter(record) {
  *        This is a temporary solution that creates two browser sessions and
  *        runs tests on them
  */
-export function parallelizeBrowserTests(tests) {
+function parallelizeBrowserTests(tests) {
   const middle = Math.floor(tests.length / 2);
 
   return Promise.all([
@@ -240,15 +241,22 @@ export function parallelizeBrowserTests(tests) {
   .then(([first, second]) => first.concat(second));
 }
 
-Promise.all([
-  parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineASTNodeType)),
-  parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineIsStatic))
-])
-.then(([first, second]) => {
-  return records.map((e, i) => ({
-    ...e,
-    astNodeType: first[i],
-    isStatic: second[i]
-  }))
-})
-.then(result => fs.promises.writeFile('meta.json', JSON.stringify(result)))
+export default function AstNodeTypeChecker() {
+  return Promise.all([
+    parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineASTNodeType)),
+    parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineIsStatic))
+  ])
+  .then(([first, second]) => {
+    return records.map((e, i) => ({
+      ...e,
+      astNodeType: first[i],
+      isStatic: second[i]
+    }))
+  })
+  .then(result => {
+    const filename = path.join(__dirname, 'meta.json')
+    fs.writeFileSync(filename, JSON.stringify(result))
+    return result
+  })
+  // .then(result => fs.promises.writeFile('meta.json', JSON.stringify(result)))
+}

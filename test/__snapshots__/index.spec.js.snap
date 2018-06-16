@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AstNodeTypeChecker should return basic output 1`] = `
+Object {
+  "apiType": "js-api",
+  "astNodeType": Array [
+    "MemberExpression",
+  ],
+  "isStatic": false,
+  "protoChain": Array [
+    "ANGLE_instanced_arrays",
+  ],
+  "protoChainId": "ANGLE_instanced_arrays",
+  "type": "js-api",
+}
+`;
