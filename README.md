@@ -14,5 +14,3 @@ const records = [{
 
 const records = await astNodeTypeCheck(records);
 ```
-
-**NOTE: ONLY COMPAT WITH NODE 10**
