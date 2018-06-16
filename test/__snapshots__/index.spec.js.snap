@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AstNodeTypeChecker should return basic output 1`] = `
+exports[`AstNodeTypeVerifier should return basic output 1`] = `
 Object {
   "apiType": "js-api",
   "astNodeType": Array [

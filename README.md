@@ -12,7 +12,7 @@ const records = [{
   protoChain: ['Array', 'push'], // corresponds to Array.prototype.push api
 }]
 
-astNodeTypeCheck(records)
+const records = await astNodeTypeCheck(records);
 ```
 
 **NOTE: ONLY COMPAT WITH NODE 10**

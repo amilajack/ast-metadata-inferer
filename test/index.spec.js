@@ -1,10 +1,10 @@
-import astNodeTypeChecker from '../'
+import astNodeTypeVerifier from '../'
 
 jest.setTimeout(20000)
 
-describe('AstNodeTypeChecker', () => {
+describe('AstNodeTypeVerifier', () => {
   it('should return basic output', async () => {
-    const [record] = await astNodeTypeChecker();
+    const [record] = await astNodeTypeVerifier();
     expect(record).toHaveProperty('apiType');
     expect(record).toHaveProperty('type');
     expect(record).toHaveProperty('protoChain');

@@ -241,7 +241,7 @@ function parallelizeBrowserTests(tests) {
   .then(([first, second]) => first.concat(second));
 }
 
-export default function AstNodeTypeChecker() {
+export default function AstNodeTypeVerifier() {
   return Promise.all([
     parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineASTNodeType)),
     parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineIsStatic))
