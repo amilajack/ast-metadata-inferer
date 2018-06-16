@@ -1,6 +1,6 @@
 ast-node-type-verifier
 ======================
-[![Build Status](https://travis-ci.org/ast-node-type-verifier.svg?branch=master&maxAge=2592)](https://travis-ci.org/ast-node-type-verifier)
+[![Build Status](https://travis-ci.org/amilajack/ast-node-type-verifier.svg?branch=master&maxAge=2592)](https://travis-ci.org/amilajack/ast-node-type-verifier)
 
 Given a list of API's, return their AST node type
 
