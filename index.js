@@ -3,24 +3,24 @@ import path from 'path';
 import Nightmare from 'nightmare';
 import browserCompatData from 'mdn-browser-compat-data';
 
-const records = []
+const records = [];
 
-const foo = Object.keys(browserCompatData.api)
+const foo = Object.keys(browserCompatData.api);
 
 for (let i = 0; i < foo.length; i++) {
   // ex. 'Window'
   const apiName = foo[i];
   // ex. Window {... }
-  const apiObject = browserCompatData.api[apiName]
+  const apiObject = browserCompatData.api[apiName];
   // ex. ['alert', 'document', ...]
-  const apis = Object.keys(apiObject)
+  const apis = Object.keys(apiObject);
 
   records.push({
     apiType: 'js-api',
     type: 'js-api',
     protoChain: [apiName],
     protoChainId: apiName
-  })
+  });
 
   for (let j = 0; j < apis.length; j++) {
     records.push({
@@ -28,7 +28,7 @@ for (let i = 0; i < foo.length; i++) {
       type: 'js-api',
       protoChain: [apiName, apis[j]],
       protoChainId: [apiName, apis[j]].join('.')
-    })
+    });
   }
 }
 
@@ -39,17 +39,15 @@ function formatJSAssertion(record) {
 
   const exceptions = new Set(['crypto', 'Crypto']);
 
-  const lowercaseTestCondition = String(
-    lowercaseParentObject !== 'function' &&
-    !exceptions.has(record.protoChain[0])
-  );
+  const lowercaseTestCondition = String(lowercaseParentObject !== 'function' &&
+    !exceptions.has(record.protoChain[0]));
 
   const lowercaseSupportTest = `
     if (${lowercaseTestCondition}) {
       ${lowercaseParentObject === 'function' ||
       lowercaseParentObject === record.protoChain[0]
-        ? ''
-        : `if (typeof ${lowercaseParentObject} !== 'undefined') {
+    ? ''
+    : `if (typeof ${lowercaseParentObject} !== 'undefined') {
           throw new Error('${record.protoChain[0]} is not supported but ${lowercaseParentObject} is supported')
         }`}
     }
@@ -222,7 +220,7 @@ function parallelizeBrowserTests(tests) {
     Nightmare()
       .goto('https://example.com')
       .evaluate(
-        (compatTest) => eval(compatTest),
+        compatTest => eval(compatTest),
         `(function() {
           return [${tests.slice(0, middle).join(',')}];
         })()`
@@ -231,14 +229,14 @@ function parallelizeBrowserTests(tests) {
     Nightmare()
       .goto('https://example.com')
       .evaluate(
-        (compatTest) => eval(compatTest),
+        compatTest => eval(compatTest),
         `(function() {
           return [${tests.slice(middle).join(',')}];
         })()`
       )
       .end()
   ])
-  .then(([first, second]) => first.concat(second));
+    .then(([first, second]) => first.concat(second));
 }
 
 export default function AstNodeTypeVerifier() {
@@ -246,17 +244,15 @@ export default function AstNodeTypeVerifier() {
     parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineASTNodeType)),
     parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineIsStatic))
   ])
-  .then(([first, second]) => {
-    return records.map((e, i) => ({
+    .then(([first, second]) => records.map((e, i) => ({
       ...e,
       astNodeType: first[i],
       isStatic: second[i]
-    }))
-  })
-  .then(result => {
-    const filename = path.join(__dirname, 'meta.json')
-    fs.writeFileSync(filename, JSON.stringify(result))
-    return result
-  })
+    })))
+    .then((result) => {
+      const filename = path.join(__dirname, 'meta.json');
+      fs.writeFileSync(filename, JSON.stringify(result));
+      return result;
+    });
   // .then(result => fs.promises.writeFile('meta.json', JSON.stringify(result)))
 }
