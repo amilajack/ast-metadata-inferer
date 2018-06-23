@@ -1,8 +1,12 @@
 // @flow
 import MicrosoftAPICatalog from './microsoft-api-catalog-data.json';
-import HasPrefix from '../../helpers/HasPrefix';
-import type { RecordType } from '../RecordType';
+// import HasPrefix from '../../helpers/HasPrefix';
+// import type { RecordType } from '../RecordType';
 
+type RecordType = {
+  protoChain: Array<string>,
+  protoChainId: string
+};
 
 type MicrosoftAPICatalogProviderType = Array<{
   name: string,
