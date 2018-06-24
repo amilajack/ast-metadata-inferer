@@ -1,4 +1,4 @@
-import astNodeTypeVerifier from '../';
+import astNodeTypeVerifier from '../src/providers';
 
 jest.setTimeout(20000);
 

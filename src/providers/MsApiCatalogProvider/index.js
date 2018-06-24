@@ -1,6 +1,6 @@
 // @flow
 import MicrosoftAPICatalog from './microsoft-api-catalog-data.json';
-// import HasPrefix from '../../helpers/HasPrefix';
+import HasPrefix from '../../helpers/HasPrefix';
 // import type { RecordType } from '../RecordType';
 
 type RecordType = {
