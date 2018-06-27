@@ -1,7 +1,13 @@
+// @flow
 import fs from 'fs';
 import path from 'path';
 import MdnCompatData from './MdnCompatDataProvider';
 import MsApiCatalogProvider from './MsApiCatalogProvider';
+
+export type RecordType = {
+  protoChain: Array<string>,
+  protoChainId: string
+};
 
 export default async function Providers() {
   const records = await Promise.all([
