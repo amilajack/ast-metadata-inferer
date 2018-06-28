@@ -1,12 +1,7 @@
 // @flow
 import MicrosoftAPICatalog from './microsoft-api-catalog-data.json';
 import HasPrefix from '../../helpers/HasPrefix';
-// import type { RecordType } from '../RecordType';
-
-type RecordType = {
-  protoChain: Array<string>,
-  protoChainId: string
-};
+import type { RecordType } from '../';
 
 type MicrosoftAPICatalogProviderType = Array<{
   name: string,
@@ -63,7 +58,7 @@ export default function MicrosoftAPICatalogProvider(): Array<RecordType> {
 
   // Convert two dimentional records to single dimentional array
   (MicrosoftAPICatalog: MicrosoftAPICatalogProviderType)
-    .forEach(record => {
+    .forEach((record) => {
       formattedRecords.push({
         ...record,
         parentName: record.name,
@@ -80,8 +75,7 @@ export default function MicrosoftAPICatalogProvider(): Array<RecordType> {
           ...api,
           spec: record.spec || false,
           parentName: record.name
-        })
-      );
+        }));
     });
 
   const JSAPIs = formattedRecords
@@ -92,13 +86,13 @@ export default function MicrosoftAPICatalogProvider(): Array<RecordType> {
       !fRecord.name.includes('-') &&
       fRecord.parentName !== 'CSS2Properties' &&
       Number.isNaN(parseInt(fRecord.name, 10)) &&
-      typeof fRecord.spec !== 'undefined'
-    )
+      typeof fRecord.spec !== 'undefined')
     .map(fRecord => ({
       id: fRecord.name,
       name: fRecord.name,
       specNames: fRecord.specNames,
       type: 'js-api',
+      apiType: 'js-api',
       specIsFinished: fRecord.spec,
       protoChain: fRecord.protoChain || [interceptAndFormat(fRecord.parentName), fRecord.name]
     }))
@@ -127,5 +121,7 @@ export default function MicrosoftAPICatalogProvider(): Array<RecordType> {
       type: 'css-api'
     }));
 
-  return [...CSSAPIs, ...JSAPIs];
+  // return [...CSSAPIs, ...JSAPIs];
+
+  return JSAPIs
 }
