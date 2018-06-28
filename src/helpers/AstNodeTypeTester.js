@@ -210,7 +210,6 @@ function parallelizeBrowserTests(tests) {
 }
 
 export default function AstNodeTypeVerifier(records: Array<RecordType>) {
-  console.log(records)
   return Promise.all([
     parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineASTNodeType)),
     parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineIsStatic))

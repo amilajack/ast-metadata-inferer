@@ -11,8 +11,8 @@ export type RecordType = {
 
 export default async function Providers() {
   const records = await Promise.all([
-    MdnCompatData(),
-    MsApiCatalogProvider()
+    MdnCompatData().filter(record => !record.protoChain.includes('RegExp')),
+    MsApiCatalogProvider().filter(record => !record.protoChain.includes('RegExp'))
   ]);
   const flattenedRecords = [...records[0], ...records[1]];
   const file = path.join(__dirname, '..', '..', 'meta.json');
