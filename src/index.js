@@ -25,7 +25,7 @@ export default async function AstNodeTypeVerifier() {
     .all(promises)
     .then(res => res.reduce((p, c) => p.concat(c), []));
 
-  const file = path.join(__dirname, '..', '..', 'meta.json');
+  const file = path.join(__dirname, '..', 'meta.json');
 
   await fs.promises.writeFile(file, JSON.stringify(recordsWithMetadata));
 
