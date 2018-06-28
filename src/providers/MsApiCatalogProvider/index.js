@@ -121,5 +121,7 @@ export default function MicrosoftAPICatalogProvider(): Array<RecordType> {
       type: 'css-api'
     }));
 
-  return [...CSSAPIs, ...JSAPIs];
+  // return [...CSSAPIs, ...JSAPIs];
+
+  return JSAPIs
 }

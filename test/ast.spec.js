@@ -21,5 +21,5 @@ describe('AstNodeTypeVerifier', () => {
       expect(_record).toHaveProperty('astNodeType');
       expect(_record).toHaveProperty('isStatic');
     });
-  });
+  }, 1000000000);
 });
