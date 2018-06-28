@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import AstNodeTypeVerifier from '../src';
 
 jest.setTimeout(2000000);
@@ -21,5 +23,13 @@ describe('AstNodeTypeVerifier', () => {
       expect(_record).toHaveProperty('astNodeType');
       expect(_record).toHaveProperty('isStatic');
     });
+
+    const filepath = path.join(__dirname, '..', 'meta.json');
+    const file = await fs.promises.readFile(filepath);
+
+    const recordsCount = JSON.parse(file.toString()).length;
+    expect(recordsCount).toBeGreaterThan(16000);
+
+    console.log(`${recordsCount} records in meta.json`);
   }, 1000000000);
 });

@@ -20,6 +20,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "start": "jest",
     "test": "jest"
   }
 }

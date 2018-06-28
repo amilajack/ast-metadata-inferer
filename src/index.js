@@ -1,8 +1,13 @@
+import fs from 'fs';
+import path from 'path';
 import Providers from './providers';
 import AstNodeTypeTester from './helpers/AstNodeTypeTester';
 
 export default async function AstNodeTypeVerifier() {
-  const records = (await Providers()).slice(0, 10000);
+  // @HACK: Temporarily ignoring the last 1K records because they
+  //        cause issues for some unknown reason. They prevent
+  //        AstNodeTypeVerifier from returning
+  const records = (await Providers()).slice(0, 16000);
   const promises = [];
   const parallelisim = 4;
   const eachRecordsSize = Math.floor(records.length / parallelisim);
@@ -16,7 +21,13 @@ export default async function AstNodeTypeVerifier() {
     promises.push(AstNodeTypeTester(recordsSlice));
   }
 
-  return Promise
+  const recordsWithMetadata = await Promise
     .all(promises)
     .then(res => res.reduce((p, c) => p.concat(c), []));
+
+  const file = path.join(__dirname, '..', '..', 'meta.json');
+
+  await fs.promises.writeFile(file, JSON.stringify(recordsWithMetadata));
+
+  return recordsWithMetadata;
 }
