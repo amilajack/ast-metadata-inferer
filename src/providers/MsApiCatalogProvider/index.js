@@ -112,16 +112,16 @@ export default function MicrosoftAPICatalogProvider(): Array<RecordType> {
     ));
 
   // Find the CSS DOM API's and use them create the css style records
-  const CSSAPIs = JSAPIs
-    .filter(record => record.protoChain.includes('CSSStyleDeclaration'))
-    .map(record => ({
-      ...record,
-      id: camelCaseToHyphen(record.name),
-      name: camelCaseToHyphen(record.name),
-      type: 'css-api'
-    }));
+  // const CSSAPIs = JSAPIs
+  //   .filter(record => record.protoChain.includes('CSSStyleDeclaration'))
+  //   .map(record => ({
+  //     ...record,
+  //     id: camelCaseToHyphen(record.name),
+  //     name: camelCaseToHyphen(record.name),
+  //     type: 'css-api'
+  //   }));
 
   // return [...CSSAPIs, ...JSAPIs];
 
-  return JSAPIs
+  return JSAPIs;
 }

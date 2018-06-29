@@ -209,12 +209,15 @@ function parallelizeBrowserTests(tests) {
     .then(([first, second]) => first.concat(second));
 }
 
-export default function AstNodeTypeVerifier(records: Array<RecordType>) {
+export default async function AstNodeTypeVerifier(records: Array<RecordType>) {
+  const supportedApiResults = await parallelizeBrowserTests(records.map(e => AssertionFormatter(e).apiIsSupported));
+  const supportedRecords = records.filter((e, i) => supportedApiResults[i]);
+
   return Promise.all([
-    parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineASTNodeType)),
-    parallelizeBrowserTests(records.map(e => AssertionFormatter(e).determineIsStatic))
+    parallelizeBrowserTests(supportedRecords.map(e => AssertionFormatter(e).determineASTNodeType)),
+    parallelizeBrowserTests(supportedRecords.map(e => AssertionFormatter(e).determineIsStatic))
   ])
-    .then(([first, second]) => records.map((e, i) => ({
+    .then(([first, second]) => supportedRecords.map((e, i) => ({
       ...e,
       astNodeType: first[i],
       isStatic: second[i]

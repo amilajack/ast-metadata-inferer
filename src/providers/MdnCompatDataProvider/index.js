@@ -1,5 +1,6 @@
 // @flow
 import browserCompatData from 'mdn-browser-compat-data';
+import { interceptAndFormat } from '../MsApiCatalogProvider';
 import type { RecordType } from '../';
 
 export default function MdnComaptDataProvider(): Array<RecordType> {
@@ -18,16 +19,16 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
     records.push({
       apiType: 'js-api',
       type: 'js-api',
-      protoChain: [apiName],
-      protoChainId: apiName
+      protoChain: [interceptAndFormat(apiName)],
+      protoChainId: interceptAndFormat(apiName)
     });
 
     for (let j = 0; j < apis.length; j++) {
       records.push({
         apiType: 'js-api',
         type: 'js-api',
-        protoChain: [apiName, apis[j]],
-        protoChainId: [apiName, apis[j]].join('.')
+        protoChain: [interceptAndFormat(apiName), apis[j]],
+        protoChainId: [interceptAndFormat(apiName), apis[j]].join('.')
       });
     }
   }
