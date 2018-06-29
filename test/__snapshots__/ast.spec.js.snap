@@ -15,23 +15,6 @@ Object {
 }
 `;
 
-exports[`AstMetadataInferer should return basic output 2`] = `
-Object {
-  "apiType": "js-api",
-  "astNodeType": Array [
-    "NewExpression",
-  ],
-  "isStatic": true,
-  "protoChain": Array [
-    "AnalyserNode",
-  ],
-  "protoChainId": "AnalyserNode",
-  "type": "js-api",
-}
-`;
-
-exports[`AstMetadataInferer should return basic output 3`] = `6015`;
-
 exports[`AstMetadataInferer should write to meta.json correctly 1`] = `
 Object {
   "apiType": "js-api",
@@ -47,4 +30,4 @@ Object {
 }
 `;
 
-exports[`AstMetadataInferer should write to meta.json correctly 2`] = `5963`;
+exports[`AstMetadataInferer should write to meta.json correctly 2`] = `6015`;
