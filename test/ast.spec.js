@@ -23,7 +23,9 @@ describe('AstMetadataInferer', () => {
       expect(_record).toHaveProperty('astNodeType');
       expect(_record).toHaveProperty('isStatic');
     });
+  });
 
+  it('should write to meta.json correctly', async () => {
     const filepath = path.join(__dirname, '..', 'meta.json');
     const file = await fs.promises.readFile(filepath);
 
@@ -33,5 +35,5 @@ describe('AstMetadataInferer', () => {
     expect(recordsCount).toMatchSnapshot();
 
     console.log(`${recordsCount} records in meta.json`);
-  }, 1000000000);
+  });
 });
