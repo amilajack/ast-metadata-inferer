@@ -1,7 +1,7 @@
 {
   "name": "ast-metadata-inferer",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "meta.json",
   "repository": "git@github.com:amilajack/ast-metadata-inferer.git",
   "author": "Amila Welihinda <amilaw@nvidia.com>",
   "license": "MIT",
