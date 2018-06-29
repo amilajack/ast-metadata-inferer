@@ -209,7 +209,7 @@ function parallelizeBrowserTests(tests) {
     .then(([first, second]) => first.concat(second));
 }
 
-export default async function AstNodeTypeVerifier(records: Array<RecordType>) {
+export default async function AstMetadataInfererTester(records: Array<RecordType>) {
   const supportedApiResults = await parallelizeBrowserTests(
       records
         .map(record => AssertionFormatter(record).apiIsSupported)

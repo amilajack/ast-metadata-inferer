@@ -1,3 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AstNodeTypeVerifier should return basic output 1`] = `undefined`;
+exports[`AstMetadataInferer should return basic output 1`] = `
+Object {
+  "apiType": "js-api",
+  "astNodeType": Array [
+    "NewExpression",
+  ],
+  "isStatic": true,
+  "protoChain": Array [
+    "AnalyserNode",
+  ],
+  "protoChainId": "AnalyserNode",
+  "type": "js-api",
+}
+`;
+
+exports[`AstMetadataInferer should return basic output 2`] = `
+Object {
+  "apiType": "js-api",
+  "astNodeType": Array [
+    "NewExpression",
+  ],
+  "isStatic": true,
+  "protoChain": Array [
+    "AnalyserNode",
+  ],
+  "protoChainId": "AnalyserNode",
+  "type": "js-api",
+}
+`;
+
+exports[`AstMetadataInferer should return basic output 3`] = `6015`;

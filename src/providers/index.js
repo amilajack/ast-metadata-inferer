@@ -34,5 +34,8 @@ export default async function Providers() {
     ...map1.values(),
     ...map2.values()
   ]
-  .filter(record => !record.protoChain.includes('RegExp'));
+  .filter(record => (
+    !record.protoChain.includes('RegExp') &&
+    !record.protoChainId.includes('@@')
+  ));
 }

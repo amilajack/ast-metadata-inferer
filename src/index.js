@@ -3,10 +3,10 @@ import path from 'path';
 import Providers from './providers';
 import AstNodeTypeTester from './helpers/AstNodeTypeTester';
 
-export default async function AstNodeTypeVerifier() {
+export default async function AstMetadataInferer() {
   // @HACK: Temporarily ignoring the last 1K records because they
   //        cause issues for some unknown reason. They prevent
-  //        AstNodeTypeVerifier from returning
+  //        AstMetadataInferer from returning
   const records = (await Providers()).slice(0, 13000);
   const promises = [];
   const parallelisim = 4;
