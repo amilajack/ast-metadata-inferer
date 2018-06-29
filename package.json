@@ -6,7 +6,7 @@
   "author": "Amila Welihinda <amilaw@nvidia.com>",
   "license": "MIT",
   "dependencies": {
-    "mdn-browser-compat-data": "^0.0.38",
+    "mdn-browser-compat-data": "^0.0.40",
     "nightmare": "^3.0.1"
   },
   "devDependencies": {
@@ -14,10 +14,10 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.19.1",
+    "eslint": "^5.0.1",
     "eslint-config-bliss": "^2.0.0",
     "eslint-config-prettier": "^2.9.0",
-    "jest": "^23.1.0"
+    "jest": "^23.2.0"
   },
   "scripts": {
     "lint": "eslint .",
