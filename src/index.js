@@ -7,7 +7,7 @@ export default async function AstNodeTypeVerifier() {
   // @HACK: Temporarily ignoring the last 1K records because they
   //        cause issues for some unknown reason. They prevent
   //        AstNodeTypeVerifier from returning
-  const records = (await Providers()).slice(0, 16000);
+  const records = (await Providers()).slice(0, 13000);
   const promises = [];
   const parallelisim = 4;
   const eachRecordsSize = Math.floor(records.length / parallelisim);

@@ -28,7 +28,7 @@ describe('AstNodeTypeVerifier', () => {
     const file = await fs.promises.readFile(filepath);
 
     const recordsCount = JSON.parse(file.toString()).length;
-    expect(recordsCount).toBeGreaterThanOrEqual(8000);
+    expect(recordsCount).toBeGreaterThanOrEqual(6000);
     expect(recordsCount.length).toMatchSnapshot();
 
     console.log(`${recordsCount} records in meta.json`);

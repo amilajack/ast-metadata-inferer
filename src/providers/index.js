@@ -9,8 +9,30 @@ export type RecordType = {
 
 export default async function Providers() {
   const records = await Promise.all([
-    MdnCompatData().filter(record => !record.protoChain.includes('RegExp')),
-    MsApiCatalogProvider().filter(record => !record.protoChain.includes('RegExp'))
+    MdnCompatData(),
+    MsApiCatalogProvider()
   ]);
-  return [...records[0], ...records[1]];
+
+  const map1 = new Map();
+  const map2 = new Map();
+
+  records[0].forEach(record => {
+    map1.set(record.protoChainId, record);
+  });
+
+  records[1].forEach(record => {
+    map2.set(record.protoChainId, record);
+  });
+
+  map1.forEach((record, key) => {
+    if (map2.has(key)) {
+      map2.delete(key);
+    }
+  });
+
+  return [
+    ...map1.values(),
+    ...map2.values()
+  ]
+  .filter(record => !record.protoChain.includes('RegExp'));
 }

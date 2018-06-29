@@ -210,8 +210,12 @@ function parallelizeBrowserTests(tests) {
 }
 
 export default async function AstNodeTypeVerifier(records: Array<RecordType>) {
-  const supportedApiResults = await parallelizeBrowserTests(records.map(e => AssertionFormatter(e).apiIsSupported));
-  const supportedRecords = records.filter((e, i) => supportedApiResults[i]);
+  const supportedApiResults = await parallelizeBrowserTests(
+      records
+        .map(record => AssertionFormatter(record).apiIsSupported)
+  );
+  const supportedRecords = records
+    .filter((record, i) => supportedApiResults[i]);
 
   return Promise.all([
     parallelizeBrowserTests(supportedRecords.map(e => AssertionFormatter(e).determineASTNodeType)),
