@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import AstMetadataInferer from '../src';
 
-jest.setTimeout(2000000);
+jest.setTimeout(60000);
 
 describe('AstMetadataInferer', () => {
   it('should return basic output', async () => {
