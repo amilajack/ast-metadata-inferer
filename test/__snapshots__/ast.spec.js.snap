@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AstMetadataInferer should expose meta.json in parsable format 1`] = `
+Object {
+  "apiType": "js-api",
+  "astNodeType": Array [
+    "MemberExpression",
+  ],
+  "isStatic": true,
+  "protoChain": Array [
+    "document",
+    "querySelector",
+  ],
+  "protoChainId": "document.querySelector",
+  "type": "js-api",
+}
+`;
+
 exports[`AstMetadataInferer should return basic output 1`] = `
 Object {
   "apiType": "js-api",

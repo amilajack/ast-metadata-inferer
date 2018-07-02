@@ -35,5 +35,15 @@ describe('AstMetadataInferer', () => {
     expect(recordsCount).toMatchSnapshot();
 
     console.log(`${recordsCount} records in meta.json`);
+
+    const AstMetadata = require('../meta.json');
+    expect(AstMetadata).toHaveLength(recordsCount)
   });
+
+  it('should expose meta.json in parsable format', () => {
+    const AstMetadata = require('../meta.json');
+    const querySelectorRecord =
+      AstMetadata.find(record => record.protoChainId === 'document.querySelector');
+    expect(querySelectorRecord).toMatchSnapshot();
+  })
 });
