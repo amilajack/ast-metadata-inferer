@@ -22,6 +22,7 @@
   "scripts": {
     "build": "NODE_ENV=production rm -rf lib && babel src --out-dir lib",
     "lint": "eslint .",
+    "preversion": "yarn build",
     "start": "jest",
     "test": "yarn start"
   },
