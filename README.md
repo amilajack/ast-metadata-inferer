@@ -25,3 +25,10 @@ console.log(AstMetadata.find(record => record.protoChainId === 'document.querySe
 //   "isStatic":true
 // }
 ```
+
+## Importing Internals
+```js
+import { AssertionFormatter } from 'ast-metadata-inferer/lib/helpers/AstNodeTypeTester';
+
+AssertionFormatter({ ... });
+```

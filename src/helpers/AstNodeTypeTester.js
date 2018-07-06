@@ -159,7 +159,7 @@ function getAllSupportCSSProperties() {
 /**
  * Create a list of browser API assertions to check if an API is supported
  */
-function AssertionFormatter(record: RecordType) {
+export function AssertionFormatter(record: RecordType) {
   switch (record.type) {
     case 'css-api':
       return {

@@ -1,6 +1,10 @@
 {
   "presets": [
-    "env",
+    ["env", {
+      "targets": {
+        "node": 10
+      }
+    }],
     "stage-0",
     "flow"
   ]
