@@ -29,5 +29,8 @@
   "files": [
     "lib",
     "meta.json"
-  ]
+  ],
+  "engines": {
+    "node": ">=10"
+  }
 }

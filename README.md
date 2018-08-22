@@ -10,6 +10,7 @@ For all the API's it supports, it gives the
 * The kind of API it is
 
 **⚠️ NOTE: HIGHTLY EXPERIMENTAL. DO NOT USE ️️⚠️**
+**⚠️ NOTE: REQUIRES NODE >=10 ️️⚠️**
 
 ## Example
 ```js

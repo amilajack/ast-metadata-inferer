@@ -1,3 +1,4 @@
+/* eslint global-require: 0 */
 import fs from 'fs';
 import path from 'path';
 import AstMetadataInferer from '../src';
@@ -31,17 +32,17 @@ describe('AstMetadataInferer', () => {
 
     expect(JSON.parse(file.toString())[0]).toMatchSnapshot();
     const recordsCount = JSON.parse(file.toString()).length;
-    expect(recordsCount).toBeGreaterThanOrEqual(6000);
+    expect(recordsCount).toMatchSnapshot();
     expect(recordsCount).toMatchSnapshot();
 
     console.log(`${recordsCount} records in meta.json`);
 
-    const AstMetadata = require('../meta.json');
+    const AstMetadata = require('../meta');
     expect(AstMetadata).toHaveLength(recordsCount)
   });
 
   it('should expose meta.json in parsable format', () => {
-    const AstMetadata = require('../meta.json');
+    const AstMetadata = require('../meta');
     const querySelectorRecord =
       AstMetadata.find(record => record.protoChainId === 'document.querySelector');
     expect(querySelectorRecord).toMatchSnapshot();
