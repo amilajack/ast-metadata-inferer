@@ -32,8 +32,7 @@ describe('AstMetadataInferer', () => {
 
     expect(JSON.parse(file.toString())[0]).toMatchSnapshot();
     const recordsCount = JSON.parse(file.toString()).length;
-    expect(recordsCount).toMatchSnapshot();
-    expect(recordsCount).toMatchSnapshot();
+    expect(recordsCount).toBeGreaterThanOrEqual(5000);
 
     console.log(`${recordsCount} records in meta.json`);
 
