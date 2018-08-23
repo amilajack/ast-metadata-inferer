@@ -1544,11 +1544,11 @@ eslint-config-bliss@^2.0.0:
     flow-bin "^0.69.0"
     prettier "^1.11.1"
 
-eslint-config-prettier@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-2.9.0.tgz#5ecd65174d486c22dff389fe036febf502d468a3"
+eslint-config-prettier@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-3.0.1.tgz#479214f64c1a4b344040924bfb97543db334b7b1"
   dependencies:
-    get-stdin "^5.0.1"
+    get-stdin "^6.0.0"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"
@@ -1990,9 +1990,9 @@ get-stdin@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-4.0.1.tgz#b968c6b0a04384324902e8bf1a5df32579a450fe"
 
-get-stdin@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-5.0.1.tgz#122e161591e21ff4c52530305693f20e6393a398"
+get-stdin@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-6.0.0.tgz#9e09bf712b360ab9225e812048f71fde9c89657b"
 
 get-stream@^3.0.0:
   version "3.0.0"
@@ -3008,9 +3008,9 @@ mdn-browser-compat-data@^0.0.36:
   dependencies:
     extend "3.0.1"
 
-mdn-browser-compat-data@^0.0.40:
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-0.0.40.tgz#d7f13de64ff90e11062cfc0db92753674feb9800"
+mdn-browser-compat-data@^0.0.46:
+  version "0.0.46"
+  resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-0.0.46.tgz#6e7a8bbc238f3d97383182b4fb8691b8197af2ee"
   dependencies:
     extend "3.0.1"
 

@@ -45,5 +45,3 @@ Object {
   "type": "js-api",
 }
 `;
-
-exports[`AstMetadataInferer should write to meta.json correctly 2`] = `6015`;
