@@ -6,7 +6,7 @@
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "mdn-browser-compat-data": "^0.0.46",
+    "mdn-browser-compat-data": "^0.0.48",
     "nightmare": "^3.0.1"
   },
   "devDependencies": {
