@@ -3008,9 +3008,9 @@ mdn-browser-compat-data@^0.0.36:
   dependencies:
     extend "3.0.1"
 
-mdn-browser-compat-data@^0.0.46:
-  version "0.0.46"
-  resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-0.0.46.tgz#6e7a8bbc238f3d97383182b4fb8691b8197af2ee"
+mdn-browser-compat-data@^0.0.48:
+  version "0.0.48"
+  resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-0.0.48.tgz#8e818f55d767e6317e5a096af407117352f490cc"
   dependencies:
     extend "3.0.1"
 
