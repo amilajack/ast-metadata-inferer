@@ -12,18 +12,16 @@ export default async function AstMetadataInferer() {
   const parallelisim = 4;
   const eachRecordsSize = Math.floor(records.length / parallelisim);
 
-  for (let i = 0; i < parallelisim; i++) {
+  for (let i = 0; i < parallelisim; i += 1) {
     const recordsSliceEnd =
-      i === parallelisim
-        ? records.length + 1
-        : (i + 1) * eachRecordsSize;
+      i === parallelisim ? records.length + 1 : (i + 1) * eachRecordsSize;
     const recordsSlice = records.slice(i * eachRecordsSize, recordsSliceEnd);
     promises.push(AstNodeTypeTester(recordsSlice));
   }
 
-  const recordsWithMetadata = await Promise
-    .all(promises)
-    .then(res => res.reduce((p, c) => p.concat(c), []));
+  const recordsWithMetadata = await Promise.all(promises).then(res =>
+    res.reduce((p, c) => p.concat(c), [])
+  );
 
   const file = path.join(__dirname, '..', 'meta.json');
 

@@ -16,7 +16,7 @@ describe('AstMetadataInferer', () => {
     expect(record).toHaveProperty('isStatic');
     expect(record).toMatchSnapshot();
 
-    records.forEach((_record) => {
+    records.forEach(_record => {
       expect(_record).toHaveProperty('apiType');
       expect(_record).toHaveProperty('type');
       expect(_record).toHaveProperty('protoChain');
@@ -37,13 +37,14 @@ describe('AstMetadataInferer', () => {
     console.log(`${recordsCount} records in meta.json`);
 
     const AstMetadata = require('../meta');
-    expect(AstMetadata).toHaveLength(recordsCount)
+    expect(AstMetadata).toHaveLength(recordsCount);
   });
 
   it('should expose meta.json in parsable format', () => {
     const AstMetadata = require('../meta');
-    const querySelectorRecord =
-      AstMetadata.find(record => record.protoChainId === 'document.querySelector');
+    const querySelectorRecord = AstMetadata.find(
+      record => record.protoChainId === 'document.querySelector'
+    );
     expect(querySelectorRecord).toMatchSnapshot();
-  })
+  });
 });

@@ -9,17 +9,23 @@ function formatJSAssertion(record) {
 
   const exceptions = new Set(['crypto', 'Crypto']);
 
-  const lowercaseTestCondition = String(lowercaseParentObject !== 'function' &&
-    !exceptions.has(record.protoChain[0]));
+  const lowercaseTestCondition = String(
+    lowercaseParentObject !== 'function' &&
+      !exceptions.has(record.protoChain[0])
+  );
 
   const lowercaseSupportTest = `
     if (${lowercaseTestCondition}) {
-      ${lowercaseParentObject === 'function' ||
-      lowercaseParentObject === record.protoChain[0]
-    ? ''
-    : `if (typeof ${lowercaseParentObject} !== 'undefined') {
-          throw new Error('${record.protoChain[0]} is not supported but ${lowercaseParentObject} is supported')
-        }`}
+      ${
+        lowercaseParentObject === 'function' ||
+        lowercaseParentObject === record.protoChain[0]
+          ? ''
+          : `if (typeof ${lowercaseParentObject} !== 'undefined') {
+          throw new Error('${
+            record.protoChain[0]
+          } is not supported but ${lowercaseParentObject} is supported')
+        }`
+      }
     }
   `;
 
@@ -36,7 +42,9 @@ function formatJSAssertion(record) {
         // a.prototype.b
         if (typeof ${record.protoChain[0]}.prototype !== 'undefined') {
           if (${remainingProtoObject.length} === 0) { return false }
-          return typeof ${[record.protoChain[0], 'prototype'].concat(remainingProtoObject).join('.')} !== 'undefined'
+          return typeof ${[record.protoChain[0], 'prototype']
+            .concat(remainingProtoObject)
+            .join('.')} !== 'undefined'
         }
         return false
       } catch (e) {
@@ -205,25 +213,31 @@ function parallelizeBrowserTests(tests) {
         })()`
       )
       .end()
-  ])
-    .then(([first, second]) => first.concat(second));
+  ]).then(([first, second]) => first.concat(second));
 }
 
-export default async function AstMetadataInfererTester(records: Array<RecordType>) {
+export default async function AstMetadataInfererTester(
+  records: Array<RecordType>
+) {
   const supportedApiResults = await parallelizeBrowserTests(
-      records
-        .map(record => AssertionFormatter(record).apiIsSupported)
+    records.map(record => AssertionFormatter(record).apiIsSupported)
   );
-  const supportedRecords = records
-    .filter((record, i) => supportedApiResults[i]);
+  const supportedRecords = records.filter(
+    (record, i) => supportedApiResults[i]
+  );
 
   return Promise.all([
-    parallelizeBrowserTests(supportedRecords.map(e => AssertionFormatter(e).determineASTNodeType)),
-    parallelizeBrowserTests(supportedRecords.map(e => AssertionFormatter(e).determineIsStatic))
-  ])
-    .then(([first, second]) => supportedRecords.map((e, i) => ({
+    parallelizeBrowserTests(
+      supportedRecords.map(e => AssertionFormatter(e).determineASTNodeType)
+    ),
+    parallelizeBrowserTests(
+      supportedRecords.map(e => AssertionFormatter(e).determineIsStatic)
+    )
+  ]).then(([first, second]) =>
+    supportedRecords.map((e, i) => ({
       ...e,
       astNodeType: first[i],
       isStatic: second[i]
-    })));
+    }))
+  );
 }
