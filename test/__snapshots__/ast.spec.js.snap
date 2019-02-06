@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AstMetadataInferer should expose meta.json in parsable format 1`] = `
+exports[`AstMetadataInferer should expose metadata.json in parsable format 1`] = `
 Object {
   "apiType": "js-api",
   "astNodeType": Array [
@@ -31,7 +31,7 @@ Object {
 }
 `;
 
-exports[`AstMetadataInferer should write to meta.json correctly 1`] = `
+exports[`AstMetadataInferer should write to metadata.json correctly 1`] = `
 Object {
   "apiType": "js-api",
   "astNodeType": Array [

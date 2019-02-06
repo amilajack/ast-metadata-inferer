@@ -23,7 +23,7 @@ export default async function AstMetadataInferer() {
     res.reduce((p, c) => p.concat(c), [])
   );
 
-  const file = path.join(__dirname, '..', 'meta.json');
+  const file = path.join(__dirname, '..', 'metadata.json');
 
   await fs.promises.writeFile(file, JSON.stringify(recordsWithMetadata));
 

@@ -1,7 +1,7 @@
 // @flow
 import browserCompatData from 'mdn-browser-compat-data';
 import { interceptAndFormat } from '../MsApiCatalogProvider';
-import type { RecordType } from '..';
+import type { RecordType } from '../../types';
 
 export default function MdnComaptDataProvider(): Array<RecordType> {
   const records = [];

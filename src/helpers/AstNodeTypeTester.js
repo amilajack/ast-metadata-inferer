@@ -1,6 +1,6 @@
 // @flow
 import Nightmare from 'nightmare';
-import type { RecordType } from '../providers';
+import type { RecordType } from '../types';
 
 function formatJSAssertion(record) {
   const remainingProtoObject = record.protoChain.filter((e, i) => i > 0);

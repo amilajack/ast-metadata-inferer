@@ -26,21 +26,21 @@ describe('AstMetadataInferer', () => {
     });
   });
 
-  it('should write to meta.json correctly', async () => {
-    const filepath = path.join(__dirname, '..', 'meta.json');
+  it('should write to metadata.json correctly', async () => {
+    const filepath = path.join(__dirname, '..', 'metadata.json');
     const file = await fs.promises.readFile(filepath);
 
     expect(JSON.parse(file.toString())[0]).toMatchSnapshot();
     const recordsCount = JSON.parse(file.toString()).length;
     expect(recordsCount).toBeGreaterThanOrEqual(5000);
 
-    console.log(`${recordsCount} records in meta.json`);
+    console.log(`${recordsCount} records in metadata.json`);
 
     const AstMetadata = require('../meta');
     expect(AstMetadata).toHaveLength(recordsCount);
   });
 
-  it('should expose meta.json in parsable format', () => {
+  it('should expose metadata.json in parsable format', () => {
     const AstMetadata = require('../meta');
     const querySelectorRecord = AstMetadata.find(
       record => record.protoChainId === 'document.querySelector'
