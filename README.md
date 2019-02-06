@@ -1,6 +1,6 @@
 ast-metadata-inferer
 ======================
-[![Build Status](https://travis-ci.org/amilajack/ast-metadata-inferer.svg?branch=master&maxAge=2592)](https://travis-ci.org/amilajack/ast-metadata-inferer) [![Greenkeeper badge](https://badges.greenkeeper.io/amilajack/ast-metadata-inferer.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/amilajack/ast-metadata-inferer.svg?branch=master&maxAge=2592)](https://travis-ci.org/amilajack/ast-metadata-inferer)
 
 A collection of metadata about browser API's. This collection is intended for tools that analyze javascript.
 
