@@ -10,10 +10,12 @@
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-flow": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
     "eslint": "^5.13.0",
     "eslint-config-bliss": "^3.2.0",
+    "eslint-plugin-flowtype-errors": "^3.6.0",
     "flow-bin": "^0.92.1",
     "jest": "^24.1.0",
     "mdn-browser-compat-data": "^0.0.65",
@@ -21,6 +23,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production rm -rf lib && babel src --out-dir lib",
+    "compat": "node -r @babel/register ./src/compat.js",
     "lint": "eslint .",
     "preversion": "yarn build",
     "start": "jest",
@@ -32,5 +35,6 @@
   ],
   "engines": {
     "node": ">=10"
-  }
+  },
+  "engineStrict": true
 }

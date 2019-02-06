@@ -36,12 +36,12 @@ describe('AstMetadataInferer', () => {
 
     console.log(`${recordsCount} records in metadata.json`);
 
-    const AstMetadata = require('../meta');
+    const AstMetadata = require('../metadata');
     expect(AstMetadata).toHaveLength(recordsCount);
   });
 
   it('should expose metadata.json in parsable format', () => {
-    const AstMetadata = require('../meta');
+    const AstMetadata = require('../metadata');
     const querySelectorRecord = AstMetadata.find(
       record => record.protoChainId === 'document.querySelector'
     );

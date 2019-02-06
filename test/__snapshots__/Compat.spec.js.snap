@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Compat should write compat records to each api record 1`] = `
+Object {
+  "apiType": "js-api",
+  "astNodeType": Array [
+    "NewExpression",
+  ],
+  "compat": Object {
+    "mdn_url": "https://developer.mozilla.org/docs/Web/API/AnalyserNode",
+    "status": Object {
+      "deprecated": false,
+      "experimental": false,
+      "standard_track": true,
+    },
+    "support": Object {
+      "chrome": Object {
+        "version_added": "14",
+      },
+      "chrome_android": Object {
+        "version_added": "18",
+      },
+      "edge": Object {
+        "version_added": true,
+      },
+      "edge_mobile": Object {
+        "version_added": true,
+      },
+      "firefox": Object {
+        "version_added": "25",
+      },
+      "firefox_android": Object {
+        "version_added": "26",
+      },
+      "ie": Object {
+        "version_added": false,
+      },
+      "opera": Object {
+        "version_added": "15",
+      },
+      "opera_android": Object {
+        "version_added": "15",
+      },
+      "safari": Object {
+        "version_added": "6",
+      },
+      "safari_ios": Object {
+        "version_added": null,
+      },
+      "samsunginternet_android": Object {
+        "version_added": true,
+      },
+      "webview_android": Object {
+        "version_added": true,
+      },
+    },
+  },
+  "isStatic": true,
+  "protoChain": Array [
+    "AnalyserNode",
+  ],
+  "protoChainId": "AnalyserNode",
+  "type": "js-api",
+}
+`;

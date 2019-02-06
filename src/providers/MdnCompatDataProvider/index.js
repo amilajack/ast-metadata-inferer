@@ -6,11 +6,11 @@ import type { RecordType } from '../../types';
 export default function MdnComaptDataProvider(): Array<RecordType> {
   const records = [];
 
-  const foo = Object.keys(browserCompatData.api);
+  const browserCompatDataApis = Object.keys(browserCompatData.api);
 
-  for (let i = 0; i < foo.length; i += 1) {
+  for (let i = 0; i < browserCompatDataApis.length; i += 1) {
     // ex. 'Window'
-    const apiName = foo[i];
+    const apiName = browserCompatDataApis[i];
     // ex. Window {... }
     const apiObject = browserCompatData.api[apiName];
     // ex. ['alert', 'document', ...]
