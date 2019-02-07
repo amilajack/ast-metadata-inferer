@@ -7,7 +7,10 @@ import AstMetadataInferer from '.';
 export default async function Compat() {
   const records = await AstMetadataInferer();
   // Add all the corresponding compat data for each inferred ast node
-  const compatDataMap = new Map(Object.entries(mdnBrowserCompatData.api));
+  const compatDataMap = new Map([
+    ...Object.entries(mdnBrowserCompatData.api),
+    ...Object.entries(mdnBrowserCompatData.javascript.builtins)
+  ]);
   const apisWithCompatRecords = records
     .filter(api => {
       const hasCompatRecord = compatDataMap.has(api.protoChain[0]);
