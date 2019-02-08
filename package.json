@@ -25,7 +25,7 @@
     "build": "NODE_ENV=production rm -rf lib && babel src --out-dir lib",
     "compat": "node -r @babel/register ./src/compat.js",
     "lint": "eslint .",
-    "preversion": "yarn build",
+    "preversion": "yarn test && yarn compat",
     "start": "jest",
     "test": "yarn start"
   },
