@@ -97,7 +97,7 @@ function formatCSSAssertion(record) {
   `;
 }
 
-function determineASTNodeType(record) {
+function determineASTNodeTypes(record) {
   const api = record.protoChain.join('.');
   const { length } = record.protoChain;
 
@@ -178,7 +178,7 @@ export function AssertionFormatter(record: RecordType) {
     case 'js-api':
       return {
         apiIsSupported: formatJSAssertion(record),
-        determineASTNodeType: determineASTNodeType(record),
+        determineASTNodeTypes: determineASTNodeTypes(record),
         determineIsStatic: determineIsStatic(record)
       };
     default:
@@ -228,7 +228,7 @@ export default async function AstMetadataInfererTester(
 
   return Promise.all([
     parallelizeBrowserTests(
-      supportedRecords.map(e => AssertionFormatter(e).determineASTNodeType)
+      supportedRecords.map(e => AssertionFormatter(e).determineASTNodeTypes)
     ),
     parallelizeBrowserTests(
       supportedRecords.map(e => AssertionFormatter(e).determineIsStatic)
@@ -236,7 +236,7 @@ export default async function AstMetadataInfererTester(
   ]).then(([first, second]) =>
     supportedRecords.map((e, i) => ({
       ...e,
-      astNodeType: first[i],
+      astNodeTypes: first[i],
       isStatic: second[i]
     }))
   );

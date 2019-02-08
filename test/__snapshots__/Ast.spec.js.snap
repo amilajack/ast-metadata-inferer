@@ -3,7 +3,7 @@
 exports[`AstMetadataInferer should expose metadata.json in parsable format 1`] = `
 Object {
   "apiType": "js-api",
-  "astNodeType": Array [
+  "astNodeTypes": Array [
     "MemberExpression",
   ],
   "isStatic": true,
@@ -19,7 +19,7 @@ Object {
 exports[`AstMetadataInferer should return basic output 1`] = `
 Object {
   "apiType": "js-api",
-  "astNodeType": Array [
+  "astNodeTypes": Array [
     "NewExpression",
   ],
   "isStatic": true,
@@ -34,7 +34,7 @@ Object {
 exports[`AstMetadataInferer should write to metadata.json correctly 1`] = `
 Object {
   "apiType": "js-api",
-  "astNodeType": Array [
+  "astNodeTypes": Array [
     "NewExpression",
   ],
   "isStatic": true,

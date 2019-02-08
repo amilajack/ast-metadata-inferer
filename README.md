@@ -20,7 +20,7 @@ console.log(firstRecord);
 //   "type":"js-api",
 //   "protoChain":["document","querySelector"],
 //   "protoChainId":"document.querySelector",
-//   "astNodeType":["MemberExpression"],
+//   "astNodeTypes":["MemberExpression"],
 //   "isStatic":true,
 //   "compat": {
 //     support: {

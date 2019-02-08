@@ -9,7 +9,7 @@ describe('Compat', () => {
     expect(record).toHaveProperty('type');
     expect(record).toHaveProperty('protoChain');
     expect(record).toHaveProperty('protoChainId');
-    expect(record).toHaveProperty('astNodeType');
+    expect(record).toHaveProperty('astNodeTypes');
     expect(record).toHaveProperty('isStatic');
     expect(record).toMatchSnapshot();
 
@@ -18,7 +18,7 @@ describe('Compat', () => {
       expect(_record).toHaveProperty('type');
       expect(_record).toHaveProperty('protoChain');
       expect(_record).toHaveProperty('protoChainId');
-      expect(_record).toHaveProperty('astNodeType');
+      expect(_record).toHaveProperty('astNodeTypes');
       expect(_record).toHaveProperty('isStatic');
       expect(_record).toHaveProperty('compat');
       // Test the properties of non-deprecated APIs

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Providers from './providers';
-import AstNodeTypeTester from './helpers/AstNodeTypeTester';
+import AstNodeTypesTester from './helpers/AstNodeTypesTester';
 
 export default async function AstMetadataInferer() {
   // @HACK: Temporarily ignoring the last 1K records because they
@@ -16,7 +16,7 @@ export default async function AstMetadataInferer() {
     const recordsSliceEnd =
       i === parallelisim ? records.length + 1 : (i + 1) * eachRecordsSize;
     const recordsSlice = records.slice(i * eachRecordsSize, recordsSliceEnd);
-    promises.push(AstNodeTypeTester(recordsSlice));
+    promises.push(AstNodeTypesTester(recordsSlice));
   }
 
   const recordsWithMetadata = await Promise.all(promises).then(res =>

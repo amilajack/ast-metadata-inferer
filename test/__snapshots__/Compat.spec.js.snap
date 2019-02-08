@@ -3,7 +3,7 @@
 exports[`Compat should write compat records to each api record 1`] = `
 Object {
   "apiType": "js-api",
-  "astNodeType": Array [
+  "astNodeTypes": Array [
     "NewExpression",
   ],
   "compat": Object {
