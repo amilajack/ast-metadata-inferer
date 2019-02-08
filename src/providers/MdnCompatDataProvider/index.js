@@ -6,13 +6,18 @@ import type { RecordType } from '../../types';
 export default function MdnComaptDataProvider(): Array<RecordType> {
   const records = [];
 
-  const browserCompatDataApis = Object.keys(browserCompatData.api);
+  const dict = {
+    ...browserCompatData.api,
+    ...browserCompatData.javascript.builtins
+  };
+
+  const browserCompatDataApis = Object.keys(dict);
 
   for (let i = 0; i < browserCompatDataApis.length; i += 1) {
     // ex. 'Window'
     const apiName = browserCompatDataApis[i];
     // ex. Window {... }
-    const apiObject = browserCompatData.api[apiName];
+    const apiObject = dict[apiName];
     // ex. ['alert', 'document', ...]
     const apis = Object.keys(apiObject);
 
@@ -20,7 +25,8 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
       apiType: 'js-api',
       type: 'js-api',
       protoChain: [interceptAndFormat(apiName)],
-      protoChainId: interceptAndFormat(apiName)
+      protoChainId: interceptAndFormat(apiName),
+      compat: apiObject.__compat
     });
 
     for (let j = 0; j < apis.length; j += 1) {
@@ -28,7 +34,8 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
         apiType: 'js-api',
         type: 'js-api',
         protoChain: [interceptAndFormat(apiName), apis[j]],
-        protoChainId: [interceptAndFormat(apiName), apis[j]].join('.')
+        protoChainId: [interceptAndFormat(apiName), apis[j]].join('.'),
+        compat: apiObject[apis[j]].__compat
       });
     }
   }

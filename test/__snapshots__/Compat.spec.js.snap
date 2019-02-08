@@ -7,59 +7,71 @@ Object {
     "NewExpression",
   ],
   "compat": Object {
-    "mdn_url": "https://developer.mozilla.org/docs/Web/API/AnalyserNode",
-    "status": Object {
-      "deprecated": false,
-      "experimental": false,
-      "standard_track": true,
+    "apiType": "js-api",
+    "compat": Object {
+      "mdn_url": "https://developer.mozilla.org/docs/Web/API/AbortController",
+      "status": Object {
+        "deprecated": false,
+        "experimental": true,
+        "standard_track": true,
+      },
+      "support": Object {
+        "chrome": Object {
+          "version_added": "66",
+        },
+        "chrome_android": Object {
+          "version_added": "66",
+        },
+        "edge": Object {
+          "version_added": "16",
+        },
+        "edge_mobile": Object {
+          "version_added": false,
+        },
+        "firefox": Object {
+          "version_added": "57",
+        },
+        "firefox_android": Object {
+          "version_added": "57",
+        },
+        "ie": Object {
+          "version_added": false,
+        },
+        "opera": Object {
+          "version_added": "53",
+        },
+        "opera_android": Object {
+          "version_added": "53",
+        },
+        "safari": Object {
+          "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://bugs.webkit.org/show_bug.cgi?id=174980'>bug 174980</a>.",
+          "partial_implementation": true,
+          "version_added": "11.1",
+        },
+        "safari_ios": Object {
+          "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://bugs.webkit.org/show_bug.cgi?id=174980'>bug 174980</a>.",
+          "partial_implementation": true,
+          "version_added": "11.1",
+        },
+        "samsunginternet_android": Object {
+          "version_added": false,
+        },
+        "webview_android": Object {
+          "version_added": "66",
+        },
+      },
     },
-    "support": Object {
-      "chrome": Object {
-        "version_added": "14",
-      },
-      "chrome_android": Object {
-        "version_added": "18",
-      },
-      "edge": Object {
-        "version_added": true,
-      },
-      "edge_mobile": Object {
-        "version_added": true,
-      },
-      "firefox": Object {
-        "version_added": "25",
-      },
-      "firefox_android": Object {
-        "version_added": "26",
-      },
-      "ie": Object {
-        "version_added": false,
-      },
-      "opera": Object {
-        "version_added": "15",
-      },
-      "opera_android": Object {
-        "version_added": "15",
-      },
-      "safari": Object {
-        "version_added": "6",
-      },
-      "safari_ios": Object {
-        "version_added": null,
-      },
-      "samsunginternet_android": Object {
-        "version_added": true,
-      },
-      "webview_android": Object {
-        "version_added": true,
-      },
-    },
+    "protoChain": Array [
+      "AbortController",
+    ],
+    "protoChainId": "AbortController",
+    "type": "js-api",
   },
   "isStatic": true,
   "protoChain": Array [
-    "AnalyserNode",
+    "AbortController",
   ],
-  "protoChainId": "AnalyserNode",
+  "protoChainId": "AbortController",
   "type": "js-api",
 }
 `;

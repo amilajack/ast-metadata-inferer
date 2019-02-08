@@ -1,12 +1,13 @@
 // @flow
 import MdnCompatData from './MdnCompatDataProvider';
 import MsApiCatalogProvider from './MsApiCatalogProvider';
+import type { RecordType } from '../types';
 
-export default async function Providers() {
+export default async function Providers(): Promise<Array<RecordType>> {
   const records = await Promise.all([MdnCompatData(), MsApiCatalogProvider()]);
 
-  const map1 = new Map();
-  const map2 = new Map();
+  const map1: Map<string, RecordType> = new Map();
+  const map2: Map<string, RecordType> = new Map();
 
   records[0].forEach(record => {
     map1.set(record.protoChainId, record);

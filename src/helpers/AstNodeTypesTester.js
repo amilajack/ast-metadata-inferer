@@ -193,9 +193,12 @@ export function AssertionFormatter(record: RecordType) {
  */
 function parallelizeBrowserTests(tests) {
   const middle = Math.floor(tests.length / 2);
+  const config = {
+    electronPath: require('electron')
+  };
 
   return Promise.all([
-    Nightmare()
+    Nightmare(config)
       .goto('https://example.com')
       .evaluate(
         compatTest => eval(compatTest),
@@ -204,7 +207,7 @@ function parallelizeBrowserTests(tests) {
         })()`
       )
       .end(),
-    Nightmare()
+    Nightmare(config)
       .goto('https://example.com')
       .evaluate(
         compatTest => eval(compatTest),

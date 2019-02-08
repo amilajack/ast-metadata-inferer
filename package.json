@@ -13,6 +13,7 @@
     "@babel/register": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
+    "electron": "^4.0.4",
     "eslint": "^5.13.0",
     "eslint-config-bliss": "^3.2.0",
     "eslint-plugin-flowtype-errors": "^3.6.0",
@@ -25,9 +26,10 @@
     "build": "NODE_ENV=production rm -rf lib && babel src --out-dir lib",
     "compat": "node -r @babel/register ./src/compat.js",
     "lint": "eslint .",
+    "metadata": "node -r @babel/register ./src/metadata.js",
     "preversion": "yarn test && yarn compat",
-    "start": "jest",
-    "test": "yarn start"
+    "start": "yarn metadata",
+    "test": "jest"
   },
   "files": [
     "lib",
