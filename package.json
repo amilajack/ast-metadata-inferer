@@ -1,7 +1,7 @@
 {
   "name": "ast-metadata-inferer",
   "version": "0.0.1",
-  "main": "metadata.json",
+  "main": "compat.json",
   "repository": "git@github.com:amilajack/ast-metadata-inferer.git",
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
@@ -31,6 +31,7 @@
   },
   "files": [
     "lib",
+    "comapt.json",
     "metadata.json"
   ],
   "engines": {

@@ -13,20 +13,23 @@ For all the API's it supports, it gives the
 ```js
 import AstMetadata from 'ast-metadata-inferer';
 
-console.log(AstMetadata.find(record => record.protoChainId === 'document.querySelector'))
+const [firstRecord] = AstMetadata;
+console.log(firstRecord);
 // {
 //   "apiType":"js-api",
 //   "type":"js-api",
 //   "protoChain":["document","querySelector"],
 //   "protoChainId":"document.querySelector",
 //   "astNodeType":["MemberExpression"],
-//   "isStatic":true
+//   "isStatic":true,
+//   "compat": {
+//     support: {
+//       chrome: {
+//         version_added: "14"
+//       },
+//       chrome_android: { version_added: "18" },
+//       ...
+//     }
+//   }
 // }
-```
-
-## Importing Internals
-```js
-import { AssertionFormatter } from 'ast-metadata-inferer/lib/helpers/AstNodeTypeTester';
-
-AssertionFormatter({ ... });
 ```
