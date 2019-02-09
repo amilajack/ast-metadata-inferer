@@ -6,10 +6,12 @@ A collection of metadata about browser API's. This collection is intended for to
 
 For all the API's it supports, it gives the
 * AST node type of the API (`MemberExpression`, `NewExpression`, or `CallExpression`)
-* If the API is statically invoked
-* The kind of API it is
+* Determines if an API is statically invoked (ex. `document.querySelector()`)
+* Determines if an API is a CSS or JS API
+* Provides compatibility information from `mdn-browser-compat-data`
 
 ## Example
+
 ```js
 import AstMetadata from 'ast-metadata-inferer';
 
@@ -33,3 +35,8 @@ console.log(firstRecord);
 //   }
 // }
 ```
+
+## Related
+
+* [eslint-plugin-compat](https://github.com/amilajack/eslint-plugin-compat)
+* [compat-db](https://github.com/amilajack/compat-db)
