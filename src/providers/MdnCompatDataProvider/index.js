@@ -18,16 +18,17 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
     const apiName = browserCompatDataApis[i];
     // ex. Window {... }
     const apiObject = dict[apiName];
-    // ex. ['alert', 'document', ...]
-    const apis = Object.keys(apiObject);
 
     records.push({
       apiType: 'js-api',
       type: 'js-api',
       protoChain: [interceptAndFormat(apiName)],
       protoChainId: interceptAndFormat(apiName),
-      compat: apiObject.__compat
+      compat: apiObject.__compat || apiObject
     });
+
+    // ex. ['alert', 'document', ...]
+    const apis = Object.keys(apiObject);
 
     for (let j = 0; j < apis.length; j += 1) {
       records.push({
@@ -35,7 +36,7 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
         type: 'js-api',
         protoChain: [interceptAndFormat(apiName), apis[j]],
         protoChainId: [interceptAndFormat(apiName), apis[j]].join('.'),
-        compat: apiObject[apis[j]].__compat
+        compat: apiObject[apis[j]].__compat || apiObject[apis[j]] || apiObject
       });
     }
   }

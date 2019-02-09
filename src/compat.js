@@ -10,21 +10,9 @@ export default async function Compat() {
   const compatDataMap = new Map(
     MdnComaptDataProvider().map(e => [e.protoChainId, e])
   );
-  const apisWithCompatRecords = records
-    .filter(api => compatDataMap.has(api.protoChainId))
-    .map(api => {
-      const compatRecord = compatDataMap.get(api.protoChain[0]);
-
-      const { __compat: compat } =
-        api.protoChain.length >= 2
-          ? compatRecord[api.protoChain[1]] || compatRecord
-          : compatRecord;
-
-      return {
-        ...api,
-        compat: compat || compatRecord
-      };
-    });
+  const apisWithCompatRecords = records.filter(api =>
+    compatDataMap.has(api.protoChainId)
+  );
 
   const compatRecordsFile = path.join(__dirname, '..', 'compat.json');
   await fs.promises.writeFile(
