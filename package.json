@@ -12,7 +12,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.4.2",
+    "babel-jest": "^23.6.0",
     "electron": "^4.0.4",
     "eslint": "^5.13.0",
     "eslint-config-bliss": "^3.2.0",
