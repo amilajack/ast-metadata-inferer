@@ -36,7 +36,7 @@
     "comapt.json",
     "metadata.json"
   ],
-  "engines": {
+  "devEngines": {
     "node": ">=10"
   },
   "engineStrict": true
