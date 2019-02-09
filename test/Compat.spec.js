@@ -5,7 +5,9 @@ jest.setTimeout(60000);
 describe('Compat', () => {
   it('should write compat records to each api record', async () => {
     const [record, ...records] = await Compat();
-    console.log(`${records.length + 1} records in compat.json`);
+    const recordsCount = records.length + 1;
+    expect(recordsCount).toBeGreaterThanOrEqual(3900);
+    console.log(`${recordsCount} records in compat.json`);
     expect(record).toHaveProperty('apiType');
     expect(record).toHaveProperty('type');
     expect(record).toHaveProperty('protoChain');
