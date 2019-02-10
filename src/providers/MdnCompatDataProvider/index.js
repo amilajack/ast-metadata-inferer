@@ -13,8 +13,6 @@ import type { RecordType } from '../../types';
 //
 // See https://github.com/mdn/browser-compat-data/issues/3425#issuecomment-462176276
 
-Hope this helps!
-
 export default function MdnComaptDataProvider(): Array<RecordType> {
   const records = [];
 
