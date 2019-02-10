@@ -3,6 +3,18 @@ import browserCompatData from 'mdn-browser-compat-data';
 import { interceptAndFormat } from '../MsApiCatalogProvider';
 import type { RecordType } from '../../types';
 
+// `version_added: true` or `version_added: "some browser version number"`
+// means that the feature has been implemented in the browser. When `true`,
+// a specific version is unknown. `version_added: false` means that the browser
+// does not support the feature, and never has. `version_added: null` means that
+// we have no idea if the browser has support for the feature. (A major goal is to
+// get rid of as many of the `null` values we can and replace them with real data
+// from the browsers.)
+//
+// See https://github.com/mdn/browser-compat-data/issues/3425#issuecomment-462176276
+
+Hope this helps!
+
 export default function MdnComaptDataProvider(): Array<RecordType> {
   const records = [];
 
