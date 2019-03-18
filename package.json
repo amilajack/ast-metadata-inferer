@@ -33,7 +33,7 @@
   },
   "files": [
     "lib",
-    "comapt.json",
+    "compat.json",
     "metadata.json"
   ],
   "devEngines": {
