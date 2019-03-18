@@ -16,7 +16,7 @@
     "electron": "^4.0.6",
     "eslint": "^5.15.0",
     "eslint-config-bliss": "^3.3.0",
-    "eslint-plugin-flowtype-errors": "^3.6.0",
+    "eslint-plugin-flowtype-errors": "^4.0.0",
     "flow-bin": "^0.94.0",
     "jest": "^24.1.0",
     "mdn-browser-compat-data": "^0.0.65",
