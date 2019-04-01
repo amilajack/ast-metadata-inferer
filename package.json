@@ -18,7 +18,7 @@
     "eslint-config-bliss": "^3.3.0",
     "eslint-plugin-flowtype-errors": "^4.1.0",
     "flow-bin": "^0.94.0",
-    "jest": "^24.1.0",
+    "jest": "^24.5.0",
     "mdn-browser-compat-data": "^0.0.65",
     "nightmare": "^3.0.1"
   },
