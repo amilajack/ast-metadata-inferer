@@ -2083,10 +2083,10 @@ electron@^2.0.18:
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
-electron@^4.2.8:
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-4.2.8.tgz#a5b9cb4e2a26986bd085f96e81005abe4c1d6eaa"
-  integrity sha512-/D9zfs+EWLN4yLV7tu2kWyXUnZQ3CKG1cmWbXeSFXF+0dNXQ8iFpY49dqZRoHGIBImFfp2x4N3Zc5Tu7rw3PJw==
+electron@^4.2.10:
+  version "4.2.10"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-4.2.10.tgz#7096450bb14875ec2e6797316c0c1034e7fe2b76"
+  integrity sha512-dFhsJOW7OZX8JxjoBdugUZh6VWbs5PjlQIH6/w1KsZO7otgBy44j9vPI31KnIid3bdMtNbmTEF+6PA32z88kRw==
   dependencies:
     "@types/node" "^10.12.18"
     electron-download "^4.1.0"
