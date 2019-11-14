@@ -19,7 +19,7 @@
     "eslint-plugin-flowtype-errors": "^4.1.0",
     "flow-bin": "^0.98.0",
     "jest": "^24.9.0",
-    "mdn-browser-compat-data": "^0.0.65",
+    "mdn-browser-compat-data": "^0.0.99",
     "nightmare": "^3.0.2"
   },
   "scripts": {
