@@ -21,10 +21,7 @@ Object {
         "version_added": true,
       },
       "edge": Object {
-        "version_added": true,
-      },
-      "edge_mobile": Object {
-        "version_added": true,
+        "version_added": "12",
       },
       "firefox": Object {
         "version_added": "3.5",
@@ -39,13 +36,16 @@ Object {
         "version_added": "10",
       },
       "opera_android": Object {
-        "version_added": "10",
+        "version_added": "10.1",
       },
       "safari": Object {
         "version_added": "3.2",
       },
       "safari_ios": Object {
         "version_added": "3.2",
+      },
+      "samsunginternet_android": Object {
+        "version_added": true,
       },
       "webview_android": Object {
         "version_added": true,
@@ -85,9 +85,6 @@ Object {
       "edge": Object {
         "version_added": "16",
       },
-      "edge_mobile": Object {
-        "version_added": false,
-      },
       "firefox": Object {
         "version_added": "57",
       },
@@ -101,20 +98,20 @@ Object {
         "version_added": "53",
       },
       "opera_android": Object {
-        "version_added": "53",
+        "version_added": "47",
       },
       "safari": Object {
-        "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://bugs.webkit.org/show_bug.cgi?id=174980'>bug 174980</a>.",
+        "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://webkit.org/b/174980'>bug 174980</a>.",
         "partial_implementation": true,
         "version_added": "11.1",
       },
       "safari_ios": Object {
-        "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://bugs.webkit.org/show_bug.cgi?id=174980'>bug 174980</a>.",
+        "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://webkit.org/b/174980'>bug 174980</a>.",
         "partial_implementation": true,
-        "version_added": "11.1",
+        "version_added": "11.3",
       },
       "samsunginternet_android": Object {
-        "version_added": false,
+        "version_added": "9.0",
       },
       "webview_android": Object {
         "version_added": "66",
@@ -153,9 +150,6 @@ Object {
       "edge": Object {
         "version_added": "16",
       },
-      "edge_mobile": Object {
-        "version_added": false,
-      },
       "firefox": Object {
         "version_added": "57",
       },
@@ -169,20 +163,20 @@ Object {
         "version_added": "53",
       },
       "opera_android": Object {
-        "version_added": "53",
+        "version_added": "47",
       },
       "safari": Object {
-        "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://bugs.webkit.org/show_bug.cgi?id=174980'>bug 174980</a>.",
+        "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://webkit.org/b/174980'>bug 174980</a>.",
         "partial_implementation": true,
         "version_added": "11.1",
       },
       "safari_ios": Object {
-        "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://bugs.webkit.org/show_bug.cgi?id=174980'>bug 174980</a>.",
+        "notes": "Even though <code>window.AbortController</code> is defined, it doesn't really abort <code>fetch</code> requests. See <a href='https://webkit.org/b/174980'>bug 174980</a>.",
         "partial_implementation": true,
-        "version_added": "11.1",
+        "version_added": "11.3",
       },
       "samsunginternet_android": Object {
-        "version_added": false,
+        "version_added": "9.0",
       },
       "webview_android": Object {
         "version_added": "66",
