@@ -1,29 +1,27 @@
 // @flow
-import Nightmare from 'nightmare';
-import type { RecordType } from '../types';
+import Nightmare from "nightmare";
+import type { RecordType } from "../types";
 
 function formatJSAssertion(record) {
   const remainingProtoObject = record.protoChain.filter((e, i) => i > 0);
-  const formattedStaticProtoChain = record.protoChain.join('.');
+  const formattedStaticProtoChain = record.protoChain.join(".");
   const lowercaseParentObject = record.protoChain[0].toLowerCase();
 
-  const exceptions = new Set(['crypto', 'Crypto']);
+  const exceptions = new Set(["crypto", "Crypto"]);
 
   const lowercaseTestCondition = String(
-    lowercaseParentObject !== 'function' &&
+    lowercaseParentObject !== "function" &&
       !exceptions.has(record.protoChain[0])
   );
 
   const lowercaseSupportTest = `
     if (${lowercaseTestCondition}) {
       ${
-        lowercaseParentObject === 'function' ||
+        lowercaseParentObject === "function" ||
         lowercaseParentObject === record.protoChain[0]
-          ? ''
+          ? ""
           : `if (typeof ${lowercaseParentObject} !== 'undefined') {
-          throw new Error('${
-            record.protoChain[0]
-          } is not supported but ${lowercaseParentObject} is supported')
+          throw new Error('${record.protoChain[0]} is not supported but ${lowercaseParentObject} is supported')
         }`
       }
     }
@@ -42,9 +40,9 @@ function formatJSAssertion(record) {
         // a.prototype.b
         if (typeof ${record.protoChain[0]}.prototype !== 'undefined') {
           if (${remainingProtoObject.length} === 0) { return false }
-          return typeof ${[record.protoChain[0], 'prototype']
+          return typeof ${[record.protoChain[0], "prototype"]
             .concat(remainingProtoObject)
-            .join('.')} !== 'undefined'
+            .join(".")} !== 'undefined'
         }
         return false
       } catch (e) {
@@ -69,7 +67,7 @@ function determineIsStatic(record) {
   return `
     (function () {
       try {
-        var protoChainIdType = typeof ${record.protoChain.join('.')}
+        var protoChainIdType = typeof ${record.protoChain.join(".")}
         return protoChainIdType !== 'undefined'
       } catch (e) {
         return e instanceof TypeError
@@ -98,7 +96,7 @@ function formatCSSAssertion(record) {
 }
 
 function determineASTNodeTypes(record) {
-  const api = record.protoChain.join('.');
+  const api = record.protoChain.join(".");
   const { length } = record.protoChain;
 
   return `
@@ -169,17 +167,17 @@ function getAllSupportCSSProperties() {
  */
 export function AssertionFormatter(record: RecordType) {
   switch (record.type) {
-    case 'css-api':
+    case "css-api":
       return {
         apiIsSupported: formatCSSAssertion(record),
         allCSSValues: getAllSupportCSSValues(record),
-        allCSSProperties: getAllSupportCSSProperties(record)
+        allCSSProperties: getAllSupportCSSProperties(record),
       };
-    case 'js-api':
+    case "js-api":
       return {
         apiIsSupported: formatJSAssertion(record),
         determineASTNodeTypes: determineASTNodeTypes(record),
-        determineIsStatic: determineIsStatic(record)
+        determineIsStatic: determineIsStatic(record),
       };
     default:
       throw new Error(`Invalid API type: "${record.type}"`);
@@ -194,28 +192,31 @@ export function AssertionFormatter(record: RecordType) {
 function parallelizeBrowserTests(tests) {
   const middle = Math.floor(tests.length / 2);
   const config = {
-    electronPath: require('electron')
+    // eslint-disable-next-line global-require
+    electronPath: require("electron"),
   };
 
   return Promise.all([
     Nightmare(config)
-      .goto('https://example.com')
+      .goto("https://example.com")
       .evaluate(
-        compatTest => eval(compatTest),
+        // eslint-disable-next-line no-eval
+        (compatTest) => eval(compatTest),
         `(function() {
-          return [${tests.slice(0, middle).join(',')}];
+          return [${tests.slice(0, middle).join(",")}];
         })()`
       )
       .end(),
     Nightmare(config)
-      .goto('https://example.com')
+      .goto("https://example.com")
       .evaluate(
-        compatTest => eval(compatTest),
+        // eslint-disable-next-line no-eval
+        (compatTest) => eval(compatTest),
         `(function() {
-          return [${tests.slice(middle).join(',')}];
+          return [${tests.slice(middle).join(",")}];
         })()`
       )
-      .end()
+      .end(),
   ]).then(([first, second]) => first.concat(second));
 }
 
@@ -223,7 +224,7 @@ export default async function AstMetadataInfererTester(
   records: Array<RecordType>
 ) {
   const supportedApiResults = await parallelizeBrowserTests(
-    records.map(record => AssertionFormatter(record).apiIsSupported)
+    records.map((record) => AssertionFormatter(record).apiIsSupported)
   );
   const supportedRecords = records.filter(
     (record, i) => supportedApiResults[i]
@@ -231,16 +232,16 @@ export default async function AstMetadataInfererTester(
 
   return Promise.all([
     parallelizeBrowserTests(
-      supportedRecords.map(e => AssertionFormatter(e).determineASTNodeTypes)
+      supportedRecords.map((e) => AssertionFormatter(e).determineASTNodeTypes)
     ),
     parallelizeBrowserTests(
-      supportedRecords.map(e => AssertionFormatter(e).determineIsStatic)
-    )
+      supportedRecords.map((e) => AssertionFormatter(e).determineIsStatic)
+    ),
   ]).then(([first, second]) =>
     supportedRecords.map((e, i) => ({
       ...e,
       astNodeTypes: first[i],
-      isStatic: second[i]
+      isStatic: second[i],
     }))
   );
 }
