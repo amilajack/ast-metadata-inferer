@@ -1,16 +1,15 @@
-// @flow
 import MicrosoftAPICatalog from "./microsoft-api-catalog-data.json";
 import HasPrefix from "../../helpers/HasPrefix";
 import type { RecordType } from "../../types";
 
 type MicrosoftAPICatalogProviderType = Array<{
-  name: string,
-  spec: boolean,
-  specNames: Array<string>,
+  name: string;
+  spec: boolean;
+  specNames: Array<string>;
   apis: Array<{
-    name: string,
-    specNames: Array<string>,
-  }>,
+    name: string;
+    specNames: Array<string>;
+  }>;
 }>;
 
 /**
@@ -75,7 +74,7 @@ export default function MicrosoftAPICatalogProvider(): Array<RecordType> {
   ];
 
   // Convert two dimentional records to single dimentional array
-  (MicrosoftAPICatalog: MicrosoftAPICatalogProviderType).forEach((record) => {
+  (MicrosoftAPICatalog as MicrosoftAPICatalogProviderType).forEach((record) => {
     formattedRecords.push({
       ...record,
       parentName: record.name,

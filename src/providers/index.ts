@@ -1,4 +1,3 @@
-// @flow
 import MdnCompatData from "./MdnCompatDataProvider";
 import MsApiCatalogProvider from "./MsApiCatalogProvider";
 import type { RecordType } from "../types";

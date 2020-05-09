@@ -1,4 +1,3 @@
-// @flow
 import browserCompatData from "mdn-browser-compat-data";
 import { interceptAndFormat } from "../MsApiCatalogProvider";
 import type { RecordType } from "../../types";

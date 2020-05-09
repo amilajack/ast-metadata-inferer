@@ -9,17 +9,19 @@
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.6",
-    "@babel/preset-flow": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
-    "babel-jest": "^26.0.1",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.5",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "electron": "^8.2.5",
     "eslint": "^7.0.0",
     "eslint-config-bliss": "^5.0.0",
-    "eslint-plugin-flowtype-errors": "^4.2.0",
-    "flow-bin": "^0.124.0",
     "jest": "^26.0.1",
     "mdn-browser-compat-data": "^1.0.20",
-    "nightmare": "^3.0.2"
+    "nightmare": "^3.0.2",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "build": "NODE_ENV=production rm -rf lib && babel src --out-dir lib",
@@ -28,7 +30,8 @@
     "metadata": "node -r @babel/register ./src/metadata.js",
     "preversion": "yarn test && yarn compat",
     "start": "yarn metadata",
-    "test": "jest"
+    "test": "jest",
+    "ts": "tsc"
   },
   "files": [
     "lib",
@@ -50,20 +53,71 @@
         "@babel/preset-env",
         {
           "targets": {
-            "node": 10
+            "node": 13
           }
         }
       ],
-      "@babel/preset-flow"
+      "@babel/preset-typescript"
     ],
     "plugins": [
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-syntax-top-level-await",
+      "@babel/plugin-proposal-optional-chaining"
     ]
   },
   "eslintConfig": {
-    "extends": "bliss",
+    "extends": [
+      "plugin:import/errors",
+      "plugin:import/typescript",
+      "prettier/@typescript-eslint",
+      "plugin:prettier/recommended",
+      "plugin:promise/recommended"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
     "rules": {
-      "import/no-extraneous-dependencies": "off"
-    }
+      "import/extensions": "off",
+      "prettier/prettier": [
+        "error"
+      ]
+    },
+    "overrides": [
+      {
+        "extends": [
+          "bliss",
+          "plugin:import/typescript",
+          "plugin:@typescript-eslint/recommended",
+          "prettier/@typescript-eslint",
+          "plugin:prettier/recommended",
+          "plugin:promise/recommended"
+        ],
+        "files": [
+          "*.ts",
+          "*.tsx"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+          "ecmaVersion": 2018,
+          "sourceType": "module"
+        },
+        "rules": {
+          "import/default": "off",
+          "import/extensions": "off",
+          "import/no-extraneous-dependencies": "off",
+          "@typescript-eslint/no-var-requires": "off"
+        }
+      },
+      {
+        "files": [
+          "*.spec.ts",
+          "*.spec.tsx"
+        ],
+        "rules": {
+          "@typescript-eslint/ban-ts-ignore": "off"
+        }
+      }
+    ]
   }
 }

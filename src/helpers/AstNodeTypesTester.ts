@@ -1,4 +1,3 @@
-// @flow
 import Nightmare from "nightmare";
 import type { RecordType } from "../types";
 

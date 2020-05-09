@@ -1,10 +1,10 @@
-// @flow
 import fs from "fs";
 import path from "path";
 import AstMetadataInferer from ".";
 import MdnComaptDataProvider from "./providers/MdnCompatDataProvider";
+import { RecordType } from "./types";
 
-export default async function Compat() {
+export default async function Compat(): Promise<RecordType> {
   const records = await AstMetadataInferer();
   // Add all the corresponding compat data for each inferred ast node
   const compatDataMap = new Map(
@@ -24,7 +24,7 @@ export default async function Compat() {
 }
 
 if (require.main === module) {
-  (async () => {
-    await Compat();
-  })();
+  Compat().catch((e) => {
+    throw new Error(e);
+  });
 }
