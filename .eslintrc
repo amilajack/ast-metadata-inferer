@@ -1,6 +1,0 @@
-{
-  "extends": "bliss",
-  "rules": {
-    "import/no-extraneous-dependencies": "off"
-  }
-}
