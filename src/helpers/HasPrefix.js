@@ -3,14 +3,12 @@
  * @flow
  */
 
-/* eslint flowtype-errors/show-errors: 0 */
-
 export const vendorPrefixMappings = {
-  chrome: 'webkit',
-  safari: 'webkit',
-  firefox: 'moz',
-  edge: 'ms',
-  ie: 'ms'
+  chrome: "webkit",
+  safari: "webkit",
+  firefox: "moz",
+  edge: "ms",
+  ie: "ms",
 };
 
 export const prefixes = Object.values(vendorPrefixMappings);
@@ -23,5 +21,5 @@ export const prefixes = Object.values(vendorPrefixMappings);
 export default function HasPrefix(property: string): boolean {
   const lowerCaseProperty = property.toLowerCase();
   // $FlowFixMe: Waiting on github.com/facebook/flow/issues/2174
-  return prefixes.some(prefix => lowerCaseProperty.includes(prefix));
+  return prefixes.some((prefix) => lowerCaseProperty.includes(prefix));
 }

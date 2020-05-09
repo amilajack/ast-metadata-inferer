@@ -1,7 +1,7 @@
 // @flow
-import browserCompatData from 'mdn-browser-compat-data';
-import { interceptAndFormat } from '../MsApiCatalogProvider';
-import type { RecordType } from '../../types';
+import browserCompatData from "mdn-browser-compat-data";
+import { interceptAndFormat } from "../MsApiCatalogProvider";
+import type { RecordType } from "../../types";
 
 // `version_added: true` or `version_added: "some browser version number"`
 // means that the feature has been implemented in the browser. When `true`,
@@ -18,7 +18,7 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
 
   const dict = {
     ...browserCompatData.api,
-    ...browserCompatData.javascript.builtins
+    ...browserCompatData.javascript.builtins,
   };
 
   const browserCompatDataApis = Object.keys(dict);
@@ -30,11 +30,12 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
     const apiObject = dict[apiName];
 
     records.push({
-      apiType: 'js-api',
-      type: 'js-api',
+      apiType: "js-api",
+      type: "js-api",
       protoChain: [interceptAndFormat(apiName)],
       protoChainId: interceptAndFormat(apiName),
-      compat: apiObject.__compat || apiObject
+      // eslint-disable-next-line no-underscore-dangle
+      compat: apiObject.__compat || apiObject,
     });
 
     // ex. ['alert', 'document', ...]
@@ -42,11 +43,12 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
 
     for (let j = 0; j < apis.length; j += 1) {
       records.push({
-        apiType: 'js-api',
-        type: 'js-api',
+        apiType: "js-api",
+        type: "js-api",
         protoChain: [interceptAndFormat(apiName), apis[j]],
-        protoChainId: [interceptAndFormat(apiName), apis[j]].join('.'),
-        compat: apiObject[apis[j]].__compat || apiObject[apis[j]] || apiObject
+        protoChainId: [interceptAndFormat(apiName), apis[j]].join("."),
+        // eslint-disable-next-line no-underscore-dangle
+        compat: apiObject[apis[j]].__compat || apiObject[apis[j]] || apiObject,
       });
     }
   }

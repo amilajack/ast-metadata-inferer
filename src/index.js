@@ -1,16 +1,16 @@
-import fs from 'fs';
-import path from 'path';
-import Providers from './providers';
-import AstNodeTypesTester from './helpers/AstNodeTypesTester';
+import fs from "fs";
+import path from "path";
+import Providers from "./providers";
+import AstNodeTypesTester from "./helpers/AstNodeTypesTester";
 
 export default async function AstMetadataInferer() {
   // @HACK: Temporarily ignoring the last 1K records because they
   //        cause issues for some unknown reason. They prevent
   //        AstMetadataInferer from returning
   const records = (await Providers()).filter(
-    e => !['close', 'confirm', 'print'].includes(e.name)
+    (e) => !["close", "confirm", "print"].includes(e.name)
   );
-  const file = path.join(__dirname, '..', 'metadata.json');
+  const file = path.join(__dirname, "..", "metadata.json");
 
   if (fs.existsSync(file)) {
     await fs.promises.unlink(file);
@@ -27,7 +27,7 @@ export default async function AstMetadataInferer() {
     promises.push(AstNodeTypesTester(recordsSlice));
   }
 
-  const recordsWithMetadata = await Promise.all(promises).then(res =>
+  const recordsWithMetadata = await Promise.all(promises).then((res) =>
     res.reduce((p, c) => p.concat(c), [])
   );
 
