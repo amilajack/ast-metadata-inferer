@@ -11,14 +11,14 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-flow": "^7.9.0",
     "@babel/register": "^7.9.0",
-    "babel-jest": "^23.6.0",
-    "electron": "^7.2.4",
-    "eslint": "^5.16.0",
-    "eslint-config-bliss": "^3.4.0",
+    "babel-jest": "^26.0.1",
+    "electron": "^8.2.5",
+    "eslint": "^7.0.0",
+    "eslint-config-bliss": "^5.0.0",
     "eslint-plugin-flowtype-errors": "^4.2.0",
-    "flow-bin": "^0.123.0",
-    "jest": "^24.9.0",
-    "mdn-browser-compat-data": "^0.0.65",
+    "flow-bin": "^0.124.0",
+    "jest": "^26.0.1",
+    "mdn-browser-compat-data": "^1.0.20",
     "nightmare": "^3.0.2"
   },
   "scripts": {
@@ -38,5 +38,10 @@
   "devEngines": {
     "node": ">=10"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "renovate": {
+    "extends": [
+      "bliss"
+    ]
+  }
 }
