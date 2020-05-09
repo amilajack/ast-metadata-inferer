@@ -16,7 +16,7 @@ describe('Compat', () => {
     expect(record).toHaveProperty('isStatic');
     expect(record).toMatchSnapshot();
 
-    records.forEach(_record => {
+    records.forEach((_record) => {
       expect(_record).toHaveProperty('apiType');
       expect(_record).toHaveProperty('type');
       expect(_record).toHaveProperty('protoChain');
