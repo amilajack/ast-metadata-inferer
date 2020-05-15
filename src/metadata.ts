@@ -1,3 +1,3 @@
-import AstMetadataInferer from ".";
+import astMetadataInferer from ".";
 
-AstMetadataInferer();
+astMetadataInferer();

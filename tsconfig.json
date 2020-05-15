@@ -6,7 +6,6 @@
     "declaration": true,
     "declarationMap": true,
     // "emitDeclarationOnly": true,
-    // "isolatedModules": true,
     "strict": true,
     "pretty": true,
     "sourceMap": true,
@@ -22,10 +21,10 @@
     "moduleResolution": "node",
     /* This needs to be false so our types are possible to consume without setting this */
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
+    "test",
     "examples",
     "targets",
     "**/lib/**/*",

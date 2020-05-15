@@ -1,6 +1,6 @@
 import browserCompatData from "mdn-browser-compat-data";
-import { interceptAndFormat } from "../MsApiCatalogProvider";
-import type { RecordType } from "../../types";
+import interceptAndNormalize from "../../helpers/normalize-protochain";
+import { ApiMetadata, API } from "../../types";
 
 // `version_added: true` or `version_added: "some browser version number"`
 // means that the feature has been implemented in the browser. When `true`,
@@ -12,8 +12,8 @@ import type { RecordType } from "../../types";
 //
 // See https://github.com/mdn/browser-compat-data/issues/3425#issuecomment-462176276
 
-export default function MdnComaptDataProvider(): Array<RecordType> {
-  const records = [];
+export default function mdnComaptDataProvider(): ApiMetadata[] {
+  const apiMetadata: ApiMetadata[] = [];
 
   const dict = {
     ...browserCompatData.api,
@@ -27,12 +27,15 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
     const apiName = browserCompatDataApis[i];
     // ex. Window {... }
     const apiObject = dict[apiName];
+    const normalizedApi = interceptAndNormalize(apiName);
 
-    records.push({
-      apiType: "js-api",
-      type: "js-api",
-      protoChain: [interceptAndFormat(apiName)],
-      protoChainId: interceptAndFormat(apiName),
+    apiMetadata.push({
+      id: normalizedApi,
+      name: apiName,
+      apiType: API.JS,
+      type: API.JS,
+      protoChain: [normalizedApi],
+      protoChainId: normalizedApi,
       // eslint-disable-next-line no-underscore-dangle
       compat: apiObject.__compat || apiObject,
     });
@@ -41,16 +44,18 @@ export default function MdnComaptDataProvider(): Array<RecordType> {
     const apis = Object.keys(apiObject);
 
     for (let j = 0; j < apis.length; j += 1) {
-      records.push({
-        apiType: "js-api",
-        type: "js-api",
-        protoChain: [interceptAndFormat(apiName), apis[j]],
-        protoChainId: [interceptAndFormat(apiName), apis[j]].join("."),
+      apiMetadata.push({
+        id: normalizedApi,
+        name: apiName,
+        apiType: API.JS,
+        type: API.JS,
+        protoChain: [normalizedApi, apis[j]],
+        protoChainId: [normalizedApi, apis[j]].join("."),
         // eslint-disable-next-line no-underscore-dangle
         compat: apiObject[apis[j]].__compat || apiObject[apis[j]] || apiObject,
       });
     }
   }
 
-  return records;
+  return apiMetadata;
 }

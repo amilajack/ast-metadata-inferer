@@ -6,12 +6,14 @@
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
     "@types/jest": "^25.2.1",
+    "@types/nightmare": "^2.10.4",
     "@types/node": "^13.13.5",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
@@ -24,10 +26,10 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "build": "NODE_ENV=production rm -rf lib && babel src --out-dir lib",
-    "compat": "node -r @babel/register ./src/compat.js",
+    "build": "NODE_ENV=production rm -rf lib && babel src --out-dir lib --extensions '.ts'",
+    "compat": "node -r @babel/register ./src/compat.ts",
     "lint": "eslint .",
-    "metadata": "node -r @babel/register ./src/metadata.js",
+    "metadata": "node -r @babel/register ./src/metadata.ts",
     "preversion": "yarn test && yarn compat",
     "start": "yarn metadata",
     "test": "jest",

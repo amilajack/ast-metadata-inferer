@@ -52,7 +52,9 @@ Object {
       },
     },
   },
+  "id": "document",
   "isStatic": true,
+  "name": "Document",
   "protoChain": Array [
     "document",
     "querySelector",
@@ -128,7 +130,9 @@ Object {
       },
     },
   },
+  "id": "AbortController",
   "isStatic": true,
+  "name": "AbortController",
   "protoChain": Array [
     "AbortController",
   ],
@@ -203,7 +207,9 @@ Object {
       },
     },
   },
+  "id": "AbortController",
   "isStatic": true,
+  "name": "AbortController",
   "protoChain": Array [
     "AbortController",
   ],

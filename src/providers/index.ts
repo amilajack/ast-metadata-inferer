@@ -1,28 +1,15 @@
-import MdnCompatData from "./MdnCompatDataProvider";
-import MsApiCatalogProvider from "./MsApiCatalogProvider";
-import type { RecordType } from "../types";
+import mdnCompatData from "./mdn";
+// @TODO: Needs to return compat records
+// import MsApiCatalogProvider from "./MsApiCatalogProvider";
+import type { ApiMetadata } from "../types";
 
-export default async function Providers(): Promise<Array<RecordType>> {
-  const records = await Promise.all([MdnCompatData(), MsApiCatalogProvider()]);
+export default async function Providers(): Promise<Array<ApiMetadata>> {
+  const [mdnRecords] = await Promise.all([mdnCompatData()]);
+  const map: Map<string, ApiMetadata> = new Map<string, ApiMetadata>(
+    mdnRecords.map((record) => [record.protoChainId, record])
+  );
 
-  const map1: Map<string, RecordType> = new Map();
-  const map2: Map<string, RecordType> = new Map();
-
-  records[0].forEach((record) => {
-    map1.set(record.protoChainId, record);
-  });
-
-  records[1].forEach((record) => {
-    map2.set(record.protoChainId, record);
-  });
-
-  map1.forEach((record, key) => {
-    if (map2.has(key)) {
-      map2.delete(key);
-    }
-  });
-
-  return [...map1.values(), ...map2.values()].filter(
+  return Array.from(map.values()).filter(
     (record) =>
       !record.protoChain.includes("RegExp") &&
       !record.protoChainId.includes("@@")

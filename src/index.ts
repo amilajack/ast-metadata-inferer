@@ -1,14 +1,18 @@
 import fs from "fs";
 import path from "path";
-import Providers from "./providers";
-import AstNodeTypesTester from "./helpers/AstNodeTypesTester";
+import providers from "./providers";
+import astNodeTypesTester from "./helpers/ast-node-types-tester";
+import { ApiMetadata } from "./types";
 
-export default async function AstMetadataInferer() {
+const API_BLACKLIST = ["close", "confirm", "print"];
+
+export default async function astMetadataInferer(): Promise<ApiMetadata[]> {
   // @HACK: Temporarily ignoring the last 1K records because they
   //        cause issues for some unknown reason. They prevent
   //        AstMetadataInferer from returning
-  const records = (await Providers()).filter(
-    (e) => !["close", "confirm", "print"].includes(e.name)
+  const providerResults = await providers();
+  const records = providerResults.filter(
+    (metadata) => !API_BLACKLIST.includes(metadata.name)
   );
   const file = path.join(__dirname, "..", "metadata.json");
 
@@ -24,7 +28,7 @@ export default async function AstMetadataInferer() {
     const recordsSliceEnd =
       i === parallelisim ? records.length + 1 : (i + 1) * eachRecordsSize;
     const recordsSlice = records.slice(i * eachRecordsSize, recordsSliceEnd);
-    promises.push(AstNodeTypesTester(recordsSlice));
+    promises.push(astNodeTypesTester(recordsSlice));
   }
 
   const recordsWithMetadata = await Promise.all(promises).then((res) =>
