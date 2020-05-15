@@ -44,13 +44,14 @@ export default function mdnComaptDataProvider(): ApiMetadata[] {
     const apis = Object.keys(apiObject);
 
     for (let j = 0; j < apis.length; j += 1) {
+      const protoChainId = [normalizedApi, apis[j]].join(".");
       apiMetadata.push({
-        id: normalizedApi,
+        id: protoChainId,
         name: apiName,
         apiType: API.JS,
         type: API.JS,
         protoChain: [normalizedApi, apis[j]],
-        protoChainId: [normalizedApi, apis[j]].join("."),
+        protoChainId,
         // eslint-disable-next-line no-underscore-dangle
         compat: apiObject[apis[j]].__compat || apiObject[apis[j]] || apiObject,
       });

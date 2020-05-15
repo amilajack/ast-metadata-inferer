@@ -1,7 +1,7 @@
 /* eslint global-require: off, no-console: off */
 import fs from "fs";
 import path from "path";
-import astMetadataInferer from "../src";
+import astMetadataInferer from "../src/metadata";
 import { ApiMetadata } from "../src/types";
 
 jest.setTimeout(60000);

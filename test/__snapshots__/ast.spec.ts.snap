@@ -52,7 +52,7 @@ Object {
       },
     },
   },
-  "id": "document",
+  "id": "document.querySelector",
   "isStatic": true,
   "name": "Document",
   "protoChain": Array [
