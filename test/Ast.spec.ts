@@ -1,13 +1,14 @@
 /* eslint global-require: off, no-console: off */
 import fs from "fs";
 import path from "path";
-import AstMetadataInferer from "../src";
+import astMetadataInferer from "../src";
+import { ApiMetadata } from "../src/types";
 
 jest.setTimeout(60000);
 
 describe("AstMetadataInferer", () => {
   it("should return basic output", async () => {
-    const [record, ...records] = await AstMetadataInferer();
+    const [record, ...records] = await astMetadataInferer();
     expect(record).toHaveProperty("apiType");
     expect(record).toHaveProperty("type");
     expect(record).toHaveProperty("protoChain");
@@ -32,18 +33,19 @@ describe("AstMetadataInferer", () => {
 
     expect(JSON.parse(file.toString())[0]).toMatchSnapshot();
     const recordsCount = JSON.parse(file.toString()).length;
-    expect(recordsCount).toBeGreaterThanOrEqual(5000);
+    expect(recordsCount).toBeGreaterThanOrEqual(4000);
 
     console.log(`${recordsCount} records in metadata.json`);
 
-    const AstMetadata = require("../metadata");
-    expect(AstMetadata).toHaveLength(recordsCount);
+    const astMetadata = await astMetadataInferer();
+    expect(astMetadata).toHaveLength(recordsCount);
   });
 
-  it("should expose metadata.json in parsable format", () => {
-    const AstMetadata = require("../metadata");
-    const querySelectorRecord = AstMetadata.find(
-      (record) => record.protoChainId === "document.querySelector"
+  it("should expose metadata.json in parsable format", async () => {
+    const astMetadata = await astMetadataInferer();
+    const querySelectorRecord = astMetadata.find(
+      (apiMetadata: ApiMetadata) =>
+        apiMetadata.protoChainId === "document.querySelector"
     );
     expect(querySelectorRecord).toMatchSnapshot();
   });

@@ -1,6 +1,5 @@
 /**
  * Determine if a css or javascript attribute is vendor-prefixed
- * @flow
  */
 
 export const vendorPrefixMappings = {

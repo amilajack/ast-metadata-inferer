@@ -25,7 +25,7 @@ describe("Compat", () => {
       expect(_record).toHaveProperty("isStatic");
       expect(_record).toHaveProperty("compat");
       // Test the properties of non-deprecated APIs
-      if (_record.compat.status && !_record.compat.status.deprecated) {
+      if (_record.compat?.status && !_record.compat.status.deprecated) {
         expect(_record).toHaveProperty("compat.support");
         expect(_record).toHaveProperty("compat.status");
       }

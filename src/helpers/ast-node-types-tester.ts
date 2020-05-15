@@ -1,9 +1,8 @@
-// @flow
 import Nightmare from "nightmare";
-import type { RecordType } from "../types";
+import { ApiMetadata, API, CssApiMetadata, JsApiMetadata } from "../types";
 
-function formatJSAssertion(record) {
-  const remainingProtoObject = record.protoChain.filter((e, i) => i > 0);
+function formatJSAssertion(record: ApiMetadata): string {
+  const remainingProtoObject = record.protoChain.filter((_, i) => i > 0);
   const formattedStaticProtoChain = record.protoChain.join(".");
   const lowercaseParentObject = record.protoChain[0].toLowerCase();
 
@@ -63,7 +62,7 @@ function formatJSAssertion(record) {
  * ex. ['Array', 'push'] => false
  * ex. ['document', 'querySelector'] => true
  */
-function determineIsStatic(record) {
+function determineIsStatic(record: ApiMetadata): string {
   return `
     (function () {
       try {
@@ -80,7 +79,7 @@ function determineIsStatic(record) {
  * Create assertion to check if a CSS property is supported
  * @TODO: Support checking if API is 'prefixed'
  */
-function formatCSSAssertion(record) {
+function formatCSSAssertion(record: CssApiMetadata): string {
   const cssPropertyName = record.protoChain[record.protoChain.length - 1];
   return `
     (function () {
@@ -95,7 +94,7 @@ function formatCSSAssertion(record) {
   `;
 }
 
-function determineASTNodeTypes(record) {
+function determineASTNodeTypes(record: JsApiMetadata): string {
   const api = record.protoChain.join(".");
   const { length } = record.protoChain;
 
@@ -132,7 +131,7 @@ function determineASTNodeTypes(record) {
  * Get all the supported css values. Evaluation will return an array of camel-cased
  * values.
  */
-function getAllSupportCSSValues() {
+function getAllSupportCSSValues(): string {
   return `
     (function () {
       var styles = document.createElement('div').style;
@@ -149,7 +148,7 @@ function getAllSupportCSSValues() {
  * Get all the supported css properties. Evaluation will return an array of
  * camel-cased properties.
  */
-function getAllSupportCSSProperties() {
+function getAllSupportCSSProperties(): string {
   return `
     (function () {
       var properties = document.body.style
@@ -162,25 +161,39 @@ function getAllSupportCSSProperties() {
   `;
 }
 
+type CSSAssertions = {
+  apiIsSupported: string;
+  allCSSValues: string;
+  allCSSProperties: string;
+};
+
+type JSAssertions = {
+  apiIsSupported: string;
+  determineASTNodeTypes: string;
+  determineIsStatic: string;
+};
+
 /**
  * Create a list of browser API assertions to check if an API is supported
  */
-export function AssertionFormatter(record: RecordType) {
+export function assertionFormatter(
+  record: CssApiMetadata | JsApiMetadata
+): CSSAssertions | JSAssertions {
   switch (record.type) {
-    case "css-api":
+    case API.CSS:
       return {
         apiIsSupported: formatCSSAssertion(record),
-        allCSSValues: getAllSupportCSSValues(record),
-        allCSSProperties: getAllSupportCSSProperties(record),
+        allCSSValues: getAllSupportCSSValues(),
+        allCSSProperties: getAllSupportCSSProperties(),
       };
-    case "js-api":
+    case API.JS:
       return {
         apiIsSupported: formatJSAssertion(record),
         determineASTNodeTypes: determineASTNodeTypes(record),
         determineIsStatic: determineIsStatic(record),
       };
     default:
-      throw new Error(`Invalid API type: "${record.type}"`);
+      throw new Error(`Invalid API type`);
   }
 }
 
@@ -189,7 +202,7 @@ export function AssertionFormatter(record: RecordType) {
  *        This is a temporary solution that creates two browser sessions and
  *        runs tests on them
  */
-function parallelizeBrowserTests(tests) {
+function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
   const middle = Math.floor(tests.length / 2);
   const config = {
     // eslint-disable-next-line global-require
@@ -201,7 +214,7 @@ function parallelizeBrowserTests(tests) {
       .goto("https://example.com")
       .evaluate(
         // eslint-disable-next-line no-eval
-        (compatTest) => eval(compatTest),
+        (compatTest: string) => eval(compatTest),
         `(function() {
           return [${tests.slice(0, middle).join(",")}];
         })()`
@@ -211,7 +224,7 @@ function parallelizeBrowserTests(tests) {
       .goto("https://example.com")
       .evaluate(
         // eslint-disable-next-line no-eval
-        (compatTest) => eval(compatTest),
+        (compatTest: string) => eval(compatTest),
         `(function() {
           return [${tests.slice(middle).join(",")}];
         })()`
@@ -220,28 +233,31 @@ function parallelizeBrowserTests(tests) {
   ]).then(([first, second]) => first.concat(second));
 }
 
-export default async function AstMetadataInfererTester(
-  records: Array<RecordType>
-) {
+interface RecordWithMetadata extends ApiMetadata {
+  isStatic: boolean;
+  astNodeTypes: string[];
+}
+
+export default async function astMetarataInfererTester(
+  apiMetadata: Array<JsApiMetadata>
+): Promise<RecordWithMetadata[]> {
   const supportedApiResults = await parallelizeBrowserTests(
-    records.map((record) => AssertionFormatter(record).apiIsSupported)
+    apiMetadata.map((record) => assertionFormatter(record).apiIsSupported)
   );
-  const supportedRecords = records.filter(
-    (record, i) => supportedApiResults[i]
-  );
+  const supportedApis = apiMetadata.filter((_, i) => supportedApiResults[i]);
 
   return Promise.all([
-    parallelizeBrowserTests(
-      supportedRecords.map((e) => AssertionFormatter(e).determineASTNodeTypes)
+    parallelizeBrowserTests<string[]>(
+      supportedApis.map((e) => assertionFormatter(e).determineASTNodeTypes)
     ),
-    parallelizeBrowserTests(
-      supportedRecords.map((e) => AssertionFormatter(e).determineIsStatic)
+    parallelizeBrowserTests<boolean>(
+      supportedApis.map((e) => assertionFormatter(e).determineIsStatic)
     ),
-  ]).then(([first, second]) =>
-    supportedRecords.map((e, i) => ({
+  ]).then(([astNodeTypeTestResults, isStaticTestResults]) =>
+    supportedApis.map((e, i) => ({
       ...e,
-      astNodeTypes: first[i],
-      isStatic: second[i],
+      astNodeTypes: astNodeTypeTestResults[i],
+      isStatic: isStaticTestResults[i],
     }))
   );
 }

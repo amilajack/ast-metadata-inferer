@@ -10,7 +10,7 @@ For all the API's it supports, it gives the
 * Determines if an API is a CSS or JS API
 * Provides compatibility information from `mdn-browser-compat-data`
 
-## Example
+## Usage
 
 ```js
 import AstMetadata from 'ast-metadata-inferer';
