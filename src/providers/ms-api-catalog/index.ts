@@ -3,7 +3,7 @@
 import microsoftAPICatalog from "./microsoft-api-catalog-data.json";
 import HasPrefix from "../../helpers/has-prefix";
 import interceptAndFormat from "../../helpers/normalize-protochain";
-import { ApiMetadata, API } from "../../types";
+import { ApiMetadata, Language } from "../../types";
 
 type MicrosoftAPICatalogProviderRecord = {
   name: string;
@@ -103,11 +103,11 @@ export default function MicrosoftAPICatalogProvider(): Array<ApiMetadata> {
         id: formattedRecord.name,
         name: formattedRecord.name,
         specNames: formattedRecord.specNames,
-        type: API.JS,
-        apiType: API.JS,
+        language: Language.JS,
         specIsFinished: formattedRecord.spec,
         protoChain,
         protoChainId: protoChain.join("."),
+        compat: {},
       };
     })
     .filter(
@@ -127,7 +127,6 @@ export default function MicrosoftAPICatalogProvider(): Array<ApiMetadata> {
   //     ...record,
   //     id: camelCaseToHyphen(record.name),
   //     name: camelCaseToHyphen(record.name),
-  //     type: 'css-api'
   //   }));
 
   // return [...CSSAPIs, ...JSAPIs];

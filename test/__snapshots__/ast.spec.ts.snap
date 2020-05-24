@@ -2,7 +2,6 @@
 
 exports[`AstMetadataInferer should expose metadata.json in parsable format 1`] = `
 Object {
-  "apiType": "js-api",
   "astNodeTypes": Array [
     "MemberExpression",
   ],
@@ -54,19 +53,19 @@ Object {
   },
   "id": "document.querySelector",
   "isStatic": true,
-  "name": "Document",
+  "kind": "web",
+  "language": "js-api",
+  "name": "querySelector",
   "protoChain": Array [
     "document",
     "querySelector",
   ],
   "protoChainId": "document.querySelector",
-  "type": "js-api",
 }
 `;
 
 exports[`AstMetadataInferer should return basic output 1`] = `
 Object {
-  "apiType": "js-api",
   "astNodeTypes": Array [
     "NewExpression",
   ],
@@ -132,18 +131,18 @@ Object {
   },
   "id": "AbortController",
   "isStatic": true,
+  "kind": "web",
+  "language": "js-api",
   "name": "AbortController",
   "protoChain": Array [
     "AbortController",
   ],
   "protoChainId": "AbortController",
-  "type": "js-api",
 }
 `;
 
 exports[`AstMetadataInferer should write to metadata.json correctly 1`] = `
 Object {
-  "apiType": "js-api",
   "astNodeTypes": Array [
     "NewExpression",
   ],
@@ -209,11 +208,12 @@ Object {
   },
   "id": "AbortController",
   "isStatic": true,
+  "kind": "web",
+  "language": "js-api",
   "name": "AbortController",
   "protoChain": Array [
     "AbortController",
   ],
   "protoChainId": "AbortController",
-  "type": "js-api",
 }
 `;

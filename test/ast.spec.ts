@@ -9,8 +9,8 @@ jest.setTimeout(60000);
 describe("AstMetadataInferer", () => {
   it("should return basic output", async () => {
     const [record, ...records] = await astMetadataInferer();
-    expect(record).toHaveProperty("apiType");
-    expect(record).toHaveProperty("type");
+    expect(record).toHaveProperty("language");
+    expect(record).toHaveProperty("kind");
     expect(record).toHaveProperty("protoChain");
     expect(record).toHaveProperty("protoChainId");
     expect(record).toHaveProperty("astNodeTypes");
@@ -18,8 +18,8 @@ describe("AstMetadataInferer", () => {
     expect(record).toMatchSnapshot();
 
     records.forEach((_record) => {
-      expect(_record).toHaveProperty("apiType");
-      expect(_record).toHaveProperty("type");
+      expect(_record).toHaveProperty("language");
+      expect(_record).toHaveProperty("kind");
       expect(_record).toHaveProperty("protoChain");
       expect(_record).toHaveProperty("protoChainId");
       expect(_record).toHaveProperty("astNodeTypes");

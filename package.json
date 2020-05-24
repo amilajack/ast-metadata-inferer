@@ -28,7 +28,7 @@
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib --extensions '.ts' && yarn metadata && yarn compat",
     "compat": "node -r ./register.js ./src/compat.ts",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "metadata": "node -r ./register.js ./src/metadata.ts",
     "preversion": "yarn test && yarn compat",
     "start": "yarn metadata",

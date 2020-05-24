@@ -1,18 +1,25 @@
-export type ApiMetadata<T = API.JS> = {
+import { CompatStatement } from "mdn-browser-compat-data/types";
+
+export type ApiMetadata<T = Language.JS> = {
   id: string;
   name: string;
-  type: T;
-  apiType?: T;
+  language: T;
+  kind: APIKind;
   protoChain: Array<string>;
   protoChainId: string;
-  compat: Record<string, any>;
+  compat: CompatStatement;
 };
 
-export type CssApiMetadata = ApiMetadata<API.CSS>;
+export type CssApiMetadata = ApiMetadata<Language.CSS>;
 
-export type JsApiMetadata = ApiMetadata<API.JS>;
+export type JsApiMetadata = ApiMetadata<Language.JS>;
 
-export enum API {
+export enum Language {
   JS = "js-api",
   CSS = "css-api",
+}
+
+export enum APIKind {
+  Web = "web",
+  ES = "es",
 }

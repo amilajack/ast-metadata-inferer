@@ -1,6 +1,6 @@
 import browserCompatData from "mdn-browser-compat-data";
 import interceptAndNormalize from "../../helpers/normalize-protochain";
-import { ApiMetadata, API } from "../../types";
+import { ApiMetadata, Language, APIKind } from "../../types";
 
 // `version_added: true` or `version_added: "some browser version number"`
 // means that the feature has been implemented in the browser. When `true`,
@@ -15,48 +15,53 @@ import { ApiMetadata, API } from "../../types";
 export default function mdnComaptDataProvider(): ApiMetadata[] {
   const apiMetadata: ApiMetadata[] = [];
 
-  const dict = {
-    ...browserCompatData.api,
-    ...browserCompatData.javascript.builtins,
-  };
+  const normalizedBrowserCompatApis = [
+    ...Object.entries(browserCompatData.api).map(([name, api]) => ({
+      ...api,
+      name,
+      kind: APIKind.Web,
+    })),
+    ...Object.entries(browserCompatData.javascript.builtins).map(
+      ([name, api]) => ({
+        ...api,
+        name,
+        kind: APIKind.ES,
+      })
+    ),
+  ];
 
-  const browserCompatDataApis = Object.keys(dict);
-
-  for (let i = 0; i < browserCompatDataApis.length; i += 1) {
+  normalizedBrowserCompatApis.forEach((api) => {
     // ex. 'Window'
-    const apiName = browserCompatDataApis[i];
     // ex. Window {... }
-    const apiObject = dict[apiName];
-    const normalizedApi = interceptAndNormalize(apiName);
+    const { name } = api;
+    const normalizedApi = interceptAndNormalize(name);
 
     apiMetadata.push({
       id: normalizedApi,
-      name: apiName,
-      apiType: API.JS,
-      type: API.JS,
+      name,
+      language: Language.JS,
       protoChain: [normalizedApi],
       protoChainId: normalizedApi,
+      kind: api.kind,
       // eslint-disable-next-line no-underscore-dangle
-      compat: apiObject.__compat || apiObject,
+      compat: api.__compat || api,
     });
 
     // ex. ['alert', 'document', ...]
-    const apis = Object.keys(apiObject);
-
-    for (let j = 0; j < apis.length; j += 1) {
-      const protoChainId = [normalizedApi, apis[j]].join(".");
+    Object.entries(api).forEach(([childName, childApi]) => {
+      const protoChainId = [normalizedApi, childName].join(".");
       apiMetadata.push({
         id: protoChainId,
-        name: apiName,
-        apiType: API.JS,
-        type: API.JS,
-        protoChain: [normalizedApi, apis[j]],
+        name: childName,
+        language: Language.JS,
+        kind: api.kind,
+        protoChain: [normalizedApi, childName],
         protoChainId,
         // eslint-disable-next-line no-underscore-dangle
-        compat: apiObject[apis[j]].__compat || apiObject[apis[j]] || apiObject,
+        compat: childApi?.__compat || childApi || api,
       });
-    }
-  }
+    });
+  });
 
   return apiMetadata;
 }

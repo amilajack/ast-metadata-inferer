@@ -1,5 +1,5 @@
 import Nightmare from "nightmare";
-import { ApiMetadata, API, CssApiMetadata, JsApiMetadata } from "../types";
+import { ApiMetadata, Language, CssApiMetadata, JsApiMetadata } from "../types";
 
 function formatJSAssertion(record: ApiMetadata): string {
   const remainingProtoObject = record.protoChain.filter((_, i) => i > 0);
@@ -179,14 +179,14 @@ type JSAssertions = {
 export function assertionFormatter(
   record: CssApiMetadata | JsApiMetadata
 ): CSSAssertions | JSAssertions {
-  switch (record.type) {
-    case API.CSS:
+  switch (record.language) {
+    case Language.CSS:
       return {
         apiIsSupported: formatCSSAssertion(record),
         allCSSValues: getAllSupportCSSValues(),
         allCSSProperties: getAllSupportCSSProperties(),
       };
-    case API.JS:
+    case Language.JS:
       return {
         apiIsSupported: formatJSAssertion(record),
         determineASTNodeTypes: determineASTNodeTypes(record),
