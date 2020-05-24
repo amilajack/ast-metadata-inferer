@@ -18,8 +18,7 @@ import AstMetadata from 'ast-metadata-inferer';
 const [firstRecord] = AstMetadata;
 console.log(firstRecord);
 // {
-//   "apiType":"js-api",
-//   "type":"js-api",
+//   "language":"js-api",
 //   "protoChain":["document","querySelector"],
 //   "protoChainId":"document.querySelector",
 //   "astNodeTypes":["MemberExpression"],

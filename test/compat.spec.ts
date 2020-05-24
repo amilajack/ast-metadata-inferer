@@ -8,8 +8,8 @@ describe("Compat", () => {
     const recordsCount = records.length + 1;
     expect(recordsCount).toBeGreaterThanOrEqual(3900);
     console.log(`${recordsCount} records in compat.json`);
-    expect(record).toHaveProperty("apiType");
-    expect(record).toHaveProperty("type");
+    expect(record).toHaveProperty("kind");
+    expect(record).toHaveProperty("language");
     expect(record).toHaveProperty("protoChain");
     expect(record).toHaveProperty("protoChainId");
     expect(record).toHaveProperty("astNodeTypes");
@@ -17,8 +17,8 @@ describe("Compat", () => {
     expect(record).toMatchSnapshot();
 
     records.forEach((_record) => {
-      expect(_record).toHaveProperty("apiType");
-      expect(_record).toHaveProperty("type");
+      expect(_record).toHaveProperty("kind");
+      expect(_record).toHaveProperty("language");
       expect(_record).toHaveProperty("protoChain");
       expect(_record).toHaveProperty("protoChainId");
       expect(_record).toHaveProperty("astNodeTypes");

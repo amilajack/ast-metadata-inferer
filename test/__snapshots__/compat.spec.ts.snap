@@ -2,7 +2,6 @@
 
 exports[`Compat should write compat records to each api record 1`] = `
 Object {
-  "apiType": "js-api",
   "astNodeTypes": Array [
     "NewExpression",
   ],
@@ -68,11 +67,12 @@ Object {
   },
   "id": "AbortController",
   "isStatic": true,
+  "kind": "web",
+  "language": "js-api",
   "name": "AbortController",
   "protoChain": Array [
     "AbortController",
   ],
   "protoChainId": "AbortController",
-  "type": "js-api",
 }
 `;
