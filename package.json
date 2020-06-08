@@ -26,14 +26,13 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "build": "rm -rf lib && babel src --out-dir lib --extensions '.ts' && yarn metadata && yarn compat",
+    "build": "rm -rf lib && babel src --out-dir lib --extensions '.ts' && yarn metadata && yarn compat && yarn tsc",
     "compat": "node -r ./register.js ./src/compat.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "metadata": "node -r ./register.js ./src/metadata.ts",
     "preversion": "yarn test && yarn compat",
     "start": "yarn metadata",
-    "test": "jest && yarn build",
-    "ts": "tsc"
+    "test": "jest && yarn build"
   },
   "files": [
     "lib",

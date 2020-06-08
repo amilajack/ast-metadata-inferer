@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/ban-ts-ignore: off */
 import Nightmare from "nightmare";
 import { ApiMetadata, Language, CssApiMetadata, JsApiMetadata } from "../types";
 
@@ -162,39 +163,34 @@ function getAllSupportCSSProperties(): string {
 }
 
 type CSSAssertions = {
+  language: Language;
   apiIsSupported: string;
   allCSSValues: string;
   allCSSProperties: string;
 };
 
 type JSAssertions = {
+  language: Language;
   apiIsSupported: string;
   determineASTNodeTypes: string;
   determineIsStatic: string;
 };
 
-/**
- * Create a list of browser API assertions to check if an API is supported
- */
-export function assertionFormatter(
-  record: CssApiMetadata | JsApiMetadata
-): CSSAssertions | JSAssertions {
-  switch (record.language) {
-    case Language.CSS:
-      return {
-        apiIsSupported: formatCSSAssertion(record),
-        allCSSValues: getAllSupportCSSValues(),
-        allCSSProperties: getAllSupportCSSProperties(),
-      };
-    case Language.JS:
-      return {
-        apiIsSupported: formatJSAssertion(record),
-        determineASTNodeTypes: determineASTNodeTypes(record),
-        determineIsStatic: determineIsStatic(record),
-      };
-    default:
-      throw new Error(`Invalid API type`);
-  }
+export function getsCssAssertions(api: CssApiMetadata): CSSAssertions {
+  return {
+    language: Language.CSS,
+    apiIsSupported: formatCSSAssertion(api),
+    allCSSValues: getAllSupportCSSValues(),
+    allCSSProperties: getAllSupportCSSProperties(),
+  };
+}
+export function getJsAssertions(api: JsApiMetadata): JSAssertions {
+  return {
+    language: Language.CSS,
+    apiIsSupported: formatJSAssertion(api),
+    determineASTNodeTypes: determineASTNodeTypes(api),
+    determineIsStatic: determineIsStatic(api),
+  };
 }
 
 /**
@@ -210,6 +206,7 @@ function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
   };
 
   return Promise.all([
+    // @ts-ignore
     Nightmare(config)
       .goto("https://example.com")
       .evaluate(
@@ -220,6 +217,7 @@ function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
         })()`
       )
       .end(),
+    // @ts-ignore
     Nightmare(config)
       .goto("https://example.com")
       .evaluate(
@@ -242,16 +240,16 @@ export default async function astMetarataInfererTester(
   apiMetadata: Array<JsApiMetadata>
 ): Promise<RecordWithMetadata[]> {
   const supportedApiResults = await parallelizeBrowserTests(
-    apiMetadata.map((record) => assertionFormatter(record).apiIsSupported)
+    apiMetadata.map((record) => getJsAssertions(record).apiIsSupported)
   );
   const supportedApis = apiMetadata.filter((_, i) => supportedApiResults[i]);
 
   return Promise.all([
     parallelizeBrowserTests<string[]>(
-      supportedApis.map((e) => assertionFormatter(e).determineASTNodeTypes)
+      supportedApis.map((e) => getJsAssertions(e).determineASTNodeTypes)
     ),
     parallelizeBrowserTests<boolean>(
-      supportedApis.map((e) => assertionFormatter(e).determineIsStatic)
+      supportedApis.map((e) => getJsAssertions(e).determineIsStatic)
     ),
   ]).then(([astNodeTypeTestResults, isStaticTestResults]) =>
     supportedApis.map((e, i) => ({

@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/ban-ts-ignore: off */
 import browserCompatData from "mdn-browser-compat-data";
 import interceptAndNormalize from "../../helpers/normalize-protochain";
 import { ApiMetadata, Language, APIKind } from "../../types";
@@ -44,6 +45,7 @@ export default function mdnComaptDataProvider(): ApiMetadata[] {
       protoChainId: normalizedApi,
       kind: api.kind,
       // eslint-disable-next-line no-underscore-dangle
+      // @ts-ignore
       compat: api.__compat || api,
     });
 
@@ -58,6 +60,7 @@ export default function mdnComaptDataProvider(): ApiMetadata[] {
         protoChain: [normalizedApi, childName],
         protoChainId,
         // eslint-disable-next-line no-underscore-dangle
+        // @ts-ignore
         compat: childApi?.__compat || childApi || api,
       });
     });
