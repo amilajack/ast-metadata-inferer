@@ -5,7 +5,7 @@
     "lib": ["esnext"],
     "declaration": true,
     "declarationMap": true,
-    // "emitDeclarationOnly": true,
+    "emitDeclarationOnly": true,
     "strict": true,
     "pretty": true,
     "sourceMap": true,
