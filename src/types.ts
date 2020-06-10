@@ -1,6 +1,12 @@
 import { CompatStatement } from "mdn-browser-compat-data/types";
 
-export type ApiMetadata<T = Language.JS> = {
+export enum AstNodeTypes {
+  MemberExpression = "MemberExpression",
+  CallExpression = "CallExpression",
+  NewExpression = "NewExpression",
+}
+
+export type ProviderApiMetadata<T = Language.JS> = {
   id: string;
   name: string;
   language: T;
@@ -9,6 +15,11 @@ export type ApiMetadata<T = Language.JS> = {
   protoChainId: string;
   compat: CompatStatement;
 };
+
+export interface ApiMetadata<T = Language.JS> extends ProviderApiMetadata<T> {
+  astNodetypes: AstNodeTypes[];
+  isBoolean: boolean;
+}
 
 export type CssApiMetadata = ApiMetadata<Language.CSS>;
 

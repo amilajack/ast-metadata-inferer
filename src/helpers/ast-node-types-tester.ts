@@ -1,8 +1,8 @@
 /* eslint @typescript-eslint/ban-ts-ignore: off */
 import Nightmare from "nightmare";
-import { ApiMetadata, Language, CssApiMetadata, JsApiMetadata } from "../types";
+import { Language, CssApiMetadata, ProviderApiMetadata } from "../types";
 
-function formatJSAssertion(record: ApiMetadata): string {
+function formatJSAssertion(record: ProviderApiMetadata<Language.JS>): string {
   const remainingProtoObject = record.protoChain.filter((_, i) => i > 0);
   const formattedStaticProtoChain = record.protoChain.join(".");
   const lowercaseParentObject = record.protoChain[0].toLowerCase();
@@ -63,7 +63,7 @@ function formatJSAssertion(record: ApiMetadata): string {
  * ex. ['Array', 'push'] => false
  * ex. ['document', 'querySelector'] => true
  */
-function determineIsStatic(record: ApiMetadata): string {
+function determineIsStatic(record: ProviderApiMetadata<Language.JS>): string {
   return `
     (function () {
       try {
@@ -95,7 +95,9 @@ function formatCSSAssertion(record: CssApiMetadata): string {
   `;
 }
 
-function determineASTNodeTypes(record: JsApiMetadata): string {
+function determineASTNodeTypes(
+  record: ProviderApiMetadata<Language.JS>
+): string {
   const api = record.protoChain.join(".");
   const { length } = record.protoChain;
 
@@ -184,7 +186,9 @@ export function getsCssAssertions(api: CssApiMetadata): CSSAssertions {
     allCSSProperties: getAllSupportCSSProperties(),
   };
 }
-export function getJsAssertions(api: JsApiMetadata): JSAssertions {
+export function getJsAssertions(
+  api: ProviderApiMetadata<Language.JS>
+): JSAssertions {
   return {
     language: Language.CSS,
     apiIsSupported: formatJSAssertion(api),
@@ -231,14 +235,9 @@ function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
   ]).then(([first, second]) => first.concat(second));
 }
 
-interface RecordWithMetadata extends ApiMetadata {
-  isStatic: boolean;
-  astNodeTypes: string[];
-}
-
 export default async function astMetarataInfererTester(
-  apiMetadata: Array<JsApiMetadata>
-): Promise<RecordWithMetadata[]> {
+  apiMetadata: ProviderApiMetadata<Language.JS>[]
+): Promise<ProviderApiMetadata[]> {
   const supportedApiResults = await parallelizeBrowserTests(
     apiMetadata.map((record) => getJsAssertions(record).apiIsSupported)
   );

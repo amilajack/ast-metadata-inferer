@@ -2,11 +2,13 @@ import fs from "fs";
 import path from "path";
 import providers from "./providers";
 import astNodeTypesTester from "./helpers/ast-node-types-tester";
-import { ApiMetadata } from "./types";
+import { ProviderApiMetadata } from "./types";
 
 const API_BLACKLIST = ["close", "confirm", "print"];
 
-export default async function astMetadataInferer(): Promise<ApiMetadata[]> {
+export default async function astMetadataInferer(): Promise<
+  ProviderApiMetadata[]
+> {
   // @HACK: Temporarily ignoring the last 1K records because they
   //        cause issues for some unknown reason. They prevent
   //        AstMetadataInferer from returning
@@ -32,7 +34,7 @@ export default async function astMetadataInferer(): Promise<ApiMetadata[]> {
   }
 
   const recordsWithMetadata = await Promise.all(promises).then((res) =>
-    res.reduce((p, c) => p.concat(c), [])
+    res.flat()
   );
 
   await fs.promises.writeFile(file, JSON.stringify(recordsWithMetadata));

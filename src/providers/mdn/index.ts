@@ -1,7 +1,7 @@
-/* eslint @typescript-eslint/ban-ts-ignore: off */
+/* eslint @typescript-eslint/ban-ts-ignore: off, no-underscore-dangle: off */
 import browserCompatData from "mdn-browser-compat-data";
 import interceptAndNormalize from "../../helpers/normalize-protochain";
-import { ApiMetadata, Language, APIKind } from "../../types";
+import { ProviderApiMetadata, Language, APIKind } from "../../types";
 
 // `version_added: true` or `version_added: "some browser version number"`
 // means that the feature has been implemented in the browser. When `true`,
@@ -13,8 +13,8 @@ import { ApiMetadata, Language, APIKind } from "../../types";
 //
 // See https://github.com/mdn/browser-compat-data/issues/3425#issuecomment-462176276
 
-export default function mdnComaptDataProvider(): ApiMetadata[] {
-  const apiMetadata: ApiMetadata[] = [];
+export default function mdnComaptDataProvider(): ProviderApiMetadata[] {
+  const apiMetadata: ProviderApiMetadata[] = [];
 
   const normalizedBrowserCompatApis = [
     ...Object.entries(browserCompatData.api).map(([name, api]) => ({
@@ -44,7 +44,6 @@ export default function mdnComaptDataProvider(): ApiMetadata[] {
       protoChain: [normalizedApi],
       protoChainId: normalizedApi,
       kind: api.kind,
-      // eslint-disable-next-line no-underscore-dangle
       // @ts-ignore
       compat: api.__compat || api,
     });

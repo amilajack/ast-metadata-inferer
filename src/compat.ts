@@ -2,12 +2,12 @@ import fs from "fs";
 import path from "path";
 import astMetadataInferer from "./metadata";
 import MdnComaptDataProvider from "./providers/mdn";
-import { ApiMetadata } from "./types";
+import { ProviderApiMetadata } from "./types";
 
 /**
  * Write compat.json file which contains API metadata and compat data
  */
-export default async function Compat(): Promise<ApiMetadata[]> {
+export default async function Compat(): Promise<ProviderApiMetadata[]> {
   const astMetadata = await astMetadataInferer();
   // Add all the corresponding compat data for each inferred ast node
   const compatDataMap = new Map(
