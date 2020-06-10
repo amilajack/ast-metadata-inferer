@@ -1,6 +1,6 @@
 {
   "name": "ast-metadata-inferer",
-  "version": "0.3.0-1",
+  "version": "0.3.0",
   "main": "compat.json",
   "repository": "git@github.com:amilajack/ast-metadata-inferer.git",
   "author": "Amila Welihinda <amilajack@gmail.com>",
