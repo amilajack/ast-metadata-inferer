@@ -17,7 +17,7 @@ export type ProviderApiMetadata<T = Language.JS> = {
 };
 
 export interface ApiMetadata<T = Language.JS> extends ProviderApiMetadata<T> {
-  astNodetypes: AstNodeTypes[];
+  astNodeTypes: AstNodeTypes[];
   isBoolean: boolean;
 }
 
