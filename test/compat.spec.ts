@@ -7,7 +7,9 @@ describe("Compat", () => {
     const [record, ...records] = await Compat();
     const recordsCount = records.length + 1;
     expect(recordsCount).toBeGreaterThanOrEqual(3900);
-    console.log(`${recordsCount} records in compat.json`);
+    if (process.env.DEBUG === "true") {
+      console.log(`${recordsCount} records in compat.json`);
+    }
     expect(record).toHaveProperty("kind");
     expect(record).toHaveProperty("language");
     expect(record).toHaveProperty("protoChain");
