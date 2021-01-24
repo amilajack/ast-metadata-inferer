@@ -20,7 +20,7 @@
     "electron": "^8.2.5",
     "eslint": "^7.0.0",
     "eslint-config-bliss": "^5.0.0",
-    "jest": "^26.0.1",
+    "jest": "^26.6.3",
     "mdn-browser-compat-data": "^1.1.2",
     "nightmare": "^3.0.2",
     "typescript": "^3.8.3"
