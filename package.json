@@ -18,7 +18,7 @@
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "electron": "^8.5.5",
-    "eslint": "^7.21.0",
+    "eslint": "^7.23.0",
     "eslint-config-bliss": "^5.0.0",
     "jest": "^26.6.3",
     "mdn-browser-compat-data": "^1.1.2",
