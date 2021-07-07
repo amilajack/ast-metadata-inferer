@@ -14,7 +14,7 @@
     "@babel/register": "^7.13.16",
     "@types/jest": "^25.2.3",
     "@types/nightmare": "^2.10.4",
-    "@types/node": "^13.13.51",
+    "@types/node": "^14.17.5",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "electron": "^8.5.5",
