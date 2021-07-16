@@ -1,19 +1,20 @@
-ast-metadata-inferer
-======================
+# ast-metadata-inferer
+
 [![Build Status](https://travis-ci.org/amilajack/ast-metadata-inferer.svg?branch=master&maxAge=2592)](https://travis-ci.org/amilajack/ast-metadata-inferer)
 
 A collection of metadata about browser API's. This collection is intended for tools that analyze JS. It currently supports `3993` compatibility records.
 
 For all the API's it supports, it gives the
-* AST node type of the API (`MemberExpression`, `NewExpression`, or `CallExpression`)
-* Determines if an API is statically invoked (ex. `document.querySelector()`)
-* Determines if an API is a CSS or JS API
-* Provides compatibility information from `mdn-browser-compat-data`
+
+- AST node type of the API (`MemberExpression`, `NewExpression`, or `CallExpression`)
+- Determines if an API is statically invoked (ex. `document.querySelector()`)
+- Determines if an API is a CSS or JS API
+- Provides compatibility information from `@mdn/browser-compat-data`
 
 ## Usage
 
 ```js
-import AstMetadata from 'ast-metadata-inferer';
+import AstMetadata from "ast-metadata-inferer";
 
 const [firstRecord] = AstMetadata;
 console.log(firstRecord);
@@ -47,5 +48,5 @@ If this project is saving you (or your team) time, please consider supporting it
 
 ## Related
 
-* [eslint-plugin-compat](https://github.com/amilajack/eslint-plugin-compat)
-* [compat-db](https://github.com/amilajack/compat-db)
+- [eslint-plugin-compat](https://github.com/amilajack/eslint-plugin-compat)
+- [compat-db](https://github.com/amilajack/compat-db)

@@ -1,4 +1,4 @@
-import { CompatStatement } from "mdn-browser-compat-data/types";
+import { CompatStatement } from "@mdn/browser-compat-data/types";
 
 export enum AstNodeTypes {
   MemberExpression = "MemberExpression",

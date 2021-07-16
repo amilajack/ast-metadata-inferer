@@ -1677,6 +1677,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@mdn/browser-compat-data@^3.3.11":
+  version "3.3.11"
+  resolved "https://registry.yarnpkg.com/@mdn/browser-compat-data/-/browser-compat-data-3.3.11.tgz#de8f3d3c1fed81415791bf15603089279f207c6f"
+  integrity sha512-lZj43fIFrNiUCOBJixccekZQrOqIBq9SWNR9sYyeUmqxl6aWjpUMcngfxbcjvxgb7tmJPl12pI6s6cQwI5oqHA==
+
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents":
   version "2.1.8-no-fsevents"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.tgz#da7c3996b8e6e19ebd14d82eaced2313e7769f9b"
@@ -5112,13 +5117,6 @@ mdn-browser-compat-data@^1.0.3:
   version "1.0.20"
   resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-1.0.20.tgz#def4dc45cdacd2b17d4d297e397e00149c06ff8f"
   integrity sha512-6sS4ydJ6+/ZnSwKUN8Jtu7NzD2pobXRolYRjHupKtRBDmx+8WZG1yUdOfF9QfCNPkWKrf3GcSFEurIrnJC56Qw==
-  dependencies:
-    extend "3.0.2"
-
-mdn-browser-compat-data@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-1.1.2.tgz#90d2a25ce731b34a14329396887dadfd657ea7b2"
-  integrity sha512-uBNX2P4iu3PZcXP20rL+n7fxN9PWZLj0y43QMe/1aXzqP3H6HbVOeePS0cBZCtMwcfr2Tugf1OHj+/wLam+dUg==
   dependencies:
     extend "3.0.2"
 
