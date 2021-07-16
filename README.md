@@ -1,6 +1,6 @@
 # ast-metadata-inferer
 
-[![Build Status](https://travis-ci.org/amilajack/ast-metadata-inferer.svg?branch=master&maxAge=2592)](https://travis-ci.org/amilajack/ast-metadata-inferer)
+[![Test](https://github.com/amilajack/ast-metadata-inferer/actions/workflows/test.yml/badge.svg)](https://github.com/amilajack/ast-metadata-inferer/actions/workflows/test.yml)
 
 A collection of metadata about browser API's. This collection is intended for tools that analyze JS. It currently supports `3993` compatibility records.
 
