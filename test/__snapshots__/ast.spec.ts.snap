@@ -7,6 +7,7 @@ Object {
   ],
   "compat": Object {
     "mdn_url": "https://developer.mozilla.org/docs/Web/API/Document/querySelector",
+    "spec_url": "https://dom.spec.whatwg.org/#ref-for-dom-parentnode-queryselector①",
     "status": Object {
       "deprecated": false,
       "experimental": false,
@@ -28,9 +29,16 @@ Object {
       "firefox_android": Object {
         "version_added": "4",
       },
-      "ie": Object {
-        "version_added": "8",
-      },
+      "ie": Array [
+        Object {
+          "version_added": "9",
+        },
+        Object {
+          "notes": "<code>querySelectorAll()</code> is supported, but only for CSS 2.1 selectors.",
+          "partial_implementation": true,
+          "version_added": "8",
+        },
+      ],
       "opera": Object {
         "version_added": "10",
       },
@@ -38,10 +46,10 @@ Object {
         "version_added": "10.1",
       },
       "safari": Object {
-        "version_added": "3.2",
+        "version_added": "3.1",
       },
       "safari_ios": Object {
-        "version_added": "3",
+        "version_added": "2",
       },
       "samsunginternet_android": Object {
         "version_added": "1.0",
@@ -71,6 +79,7 @@ Object {
   ],
   "compat": Object {
     "mdn_url": "https://developer.mozilla.org/docs/Web/API/AbortController",
+    "spec_url": "https://dom.spec.whatwg.org/#interface-abortcontroller",
     "status": Object {
       "deprecated": false,
       "experimental": true,
@@ -94,6 +103,9 @@ Object {
       },
       "ie": Object {
         "version_added": false,
+      },
+      "nodejs": Object {
+        "version_added": "15.0.0",
       },
       "opera": Object {
         "version_added": "53",
@@ -148,6 +160,7 @@ Object {
   ],
   "compat": Object {
     "mdn_url": "https://developer.mozilla.org/docs/Web/API/AbortController",
+    "spec_url": "https://dom.spec.whatwg.org/#interface-abortcontroller",
     "status": Object {
       "deprecated": false,
       "experimental": true,
@@ -171,6 +184,9 @@ Object {
       },
       "ie": Object {
         "version_added": false,
+      },
+      "nodejs": Object {
+        "version_added": "15.0.0",
       },
       "opera": Object {
         "version_added": "53",

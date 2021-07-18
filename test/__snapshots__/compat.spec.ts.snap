@@ -7,6 +7,7 @@ Object {
   ],
   "compat": Object {
     "mdn_url": "https://developer.mozilla.org/docs/Web/API/AbortController",
+    "spec_url": "https://dom.spec.whatwg.org/#interface-abortcontroller",
     "status": Object {
       "deprecated": false,
       "experimental": true,
@@ -30,6 +31,9 @@ Object {
       },
       "ie": Object {
         "version_added": false,
+      },
+      "nodejs": Object {
+        "version_added": "15.0.0",
       },
       "opera": Object {
         "version_added": "53",

@@ -1,5 +1,5 @@
 /* eslint @typescript-eslint/ban-ts-ignore: off, no-underscore-dangle: off */
-import browserCompatData from "mdn-browser-compat-data";
+import browserCompatData from "@mdn/browser-compat-data";
 import interceptAndNormalize from "../../helpers/normalize-protochain";
 import { ProviderApiMetadata, Language, APIKind } from "../../types";
 
