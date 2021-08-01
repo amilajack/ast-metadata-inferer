@@ -1833,10 +1833,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.4.tgz#38fd73ddfd9b55abb1e1b2ed578cb55bd7b7d339"
   integrity sha512-8+KAKzEvSUdeo+kmqnKrqgeE+LcA0tjYWFY7RPProVYwnqDjukzO+3b6dLD56rYX5TdWejnEOLJYOIeh4CXKuA==
 
-"@types/nightmare@^2.10.4":
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/@types/nightmare/-/nightmare-2.10.4.tgz#9e2fb3c0a0fab515dd57568c4e43169ecc22d854"
-  integrity sha512-G7wcaXQ4LOTglVnNBylEZO13GH7+4SGxjCSV7/tm3Ae20tkJ3zCKdqYEP81ojP4TlqGXS03kxcvr14rvqxxC6A==
+"@types/nightmare@^2.10.5":
+  version "2.10.5"
+  resolved "https://registry.yarnpkg.com/@types/nightmare/-/nightmare-2.10.5.tgz#4cadb6378757a6948a4eae402d3f242942a8d82b"
+  integrity sha512-8+NVwIMonTUol4ExrzK+Ppxo4ozgluUoIY6WRkS9zChwlJ+dTo9g43nGUcgS1AJXyMZMOXAB62B27kjIFCqguA==
   dependencies:
     "@types/node" "*"
 
