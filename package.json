@@ -121,6 +121,6 @@
     ]
   },
   "dependencies": {
-    "@mdn/browser-compat-data": "^3.3.11"
+    "@mdn/browser-compat-data": "^3.3.14"
   }
 }
