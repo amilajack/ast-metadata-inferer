@@ -4,7 +4,7 @@ import path from "path";
 import astMetadataInferer from "../src/metadata";
 import { ApiMetadata } from "../src/types";
 
-jest.setTimeout(60000);
+jest.setTimeout(process.env.CI ? 600_000 : 60_000);
 
 describe("AstMetadataInferer", () => {
   it("should return basic output", async () => {
@@ -44,6 +44,7 @@ describe("AstMetadataInferer", () => {
   it("should expose metadata.json in parsable format", async () => {
     const astMetadata = await astMetadataInferer();
     const querySelectorRecord = astMetadata.find(
+      // @ts-ignore
       (apiMetadata: ApiMetadata) =>
         apiMetadata.protoChainId === "document.querySelector"
     );

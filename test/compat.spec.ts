@@ -1,12 +1,12 @@
 import Compat from "../src/compat";
 
-jest.setTimeout(60000);
+jest.setTimeout(process.env.CI ? 600_000 : 60_000);
 
 describe("Compat", () => {
   it("should write compat records to each api record", async () => {
     const [record, ...records] = await Compat();
     const recordsCount = records.length + 1;
-    expect(recordsCount).toBeGreaterThanOrEqual(3900);
+    expect(recordsCount).toBeGreaterThanOrEqual(3_900);
     if (process.env.DEBUG === "true") {
       console.log(`${recordsCount} records in compat.json`);
     }

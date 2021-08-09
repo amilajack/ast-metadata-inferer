@@ -6,12 +6,6 @@
   "author": "Amila Welihinda <amilajack@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
-    "@babel/plugin-proposal-class-properties": "^7.14.5",
-    "@babel/preset-env": "^7.15.0",
-    "@babel/preset-typescript": "^7.15.0",
-    "@babel/register": "^7.14.5",
     "@types/jest": "^26.0.24",
     "@types/nightmare": "^2.10.5",
     "@types/node": "^16.4.13",
@@ -22,13 +16,15 @@
     "eslint-config-bliss": "^5.0.0",
     "jest": "^27.0.6",
     "nightmare": "^3.0.2",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^10.2.0",
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "build": "rm -rf lib && babel src --out-dir lib --extensions '.ts' && yarn metadata && yarn compat && yarn tsc",
-    "compat": "node -r ./register.js ./src/compat.ts",
+    "build": "rm -rf lib && tsc && yarn metadata && yarn compat && yarn tsc",
+    "compat": "ts-node ./src/compat.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "metadata": "node -r ./register.js ./src/metadata.ts",
+    "metadata": "ts-node ./src/metadata.ts",
     "preversion": "yarn test && yarn compat",
     "start": "yarn metadata",
     "test": "jest && yarn build"
@@ -47,23 +43,6 @@
       "bliss"
     ]
   },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": 13
-          }
-        }
-      ],
-      "@babel/preset-typescript"
-    ],
-    "plugins": [
-      "@babel/plugin-syntax-top-level-await",
-      "@babel/plugin-proposal-optional-chaining"
-    ]
-  },
   "eslintConfig": {
     "extends": [
       "plugin:import/errors",
@@ -72,7 +51,6 @@
       "plugin:prettier/recommended",
       "plugin:promise/recommended"
     ],
-    "parser": "babel-eslint",
     "parserOptions": {
       "ecmaVersion": 2018,
       "sourceType": "module"
