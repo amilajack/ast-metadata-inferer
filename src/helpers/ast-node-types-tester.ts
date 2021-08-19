@@ -207,6 +207,10 @@ function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
   const config = {
     // eslint-disable-next-line global-require
     electronPath: require("electron"),
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
   };
 
   return Promise.all([

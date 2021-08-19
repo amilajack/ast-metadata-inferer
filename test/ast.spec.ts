@@ -1,6 +1,5 @@
 /* eslint global-require: off, no-console: off */
 import fs from "fs";
-import path from "path";
 import astMetadataInferer from "../src/metadata";
 import { ApiMetadata } from "../src/types";
 
@@ -28,7 +27,7 @@ describe("AstMetadataInferer", () => {
   });
 
   it("should write to metadata.json correctly", async () => {
-    const filepath = path.join(__dirname, "..", "metadata.json");
+    const filepath = require.resolve("../metadata.json");
     const file = await fs.promises.readFile(filepath);
 
     expect(JSON.parse(file.toString())[0]).toMatchSnapshot();
