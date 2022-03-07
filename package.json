@@ -11,7 +11,7 @@
     "@types/node": "^16.6.2",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
-    "electron": "^13.2.1",
+    "electron": "^13.6.9",
     "eslint": "^7.32.0",
     "eslint-config-bliss": "^5.0.0",
     "jest": "^27.0.6",
