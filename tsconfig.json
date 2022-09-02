@@ -8,6 +8,7 @@
     "emitDeclarationOnly": true,
     "strict": true,
     "pretty": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
     /* Additional Checks */
     "noUnusedLocals": true,

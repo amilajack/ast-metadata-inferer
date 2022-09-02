@@ -7,6 +7,7 @@ Object {
   ],
   "compat": Object {
     "mdn_url": "https://developer.mozilla.org/docs/Web/API/Document/querySelector",
+    "source_file": "api/Document.json",
     "spec_url": "https://dom.spec.whatwg.org/#ref-for-dom-parentnode-queryselector①",
     "status": Object {
       "deprecated": false,
@@ -39,6 +40,9 @@ Object {
           "version_added": "8",
         },
       ],
+      "oculus": Object {
+        "version_added": "5.0",
+      },
       "opera": Object {
         "version_added": "10",
       },
@@ -55,7 +59,7 @@ Object {
         "version_added": "1.0",
       },
       "webview_android": Object {
-        "version_added": "1",
+        "version_added": "4.4",
       },
     },
   },
@@ -79,10 +83,11 @@ Object {
   ],
   "compat": Object {
     "mdn_url": "https://developer.mozilla.org/docs/Web/API/AbortController",
+    "source_file": "api/AbortController.json",
     "spec_url": "https://dom.spec.whatwg.org/#interface-abortcontroller",
     "status": Object {
       "deprecated": false,
-      "experimental": true,
+      "experimental": false,
       "standard_track": true,
     },
     "support": Object {
@@ -91,6 +96,9 @@ Object {
       },
       "chrome_android": Object {
         "version_added": "66",
+      },
+      "deno": Object {
+        "version_added": "1.0",
       },
       "edge": Object {
         "version_added": "16",
@@ -106,6 +114,9 @@ Object {
       },
       "nodejs": Object {
         "version_added": "15.0.0",
+      },
+      "oculus": Object {
+        "version_added": "5.0",
       },
       "opera": Object {
         "version_added": "53",
@@ -160,10 +171,11 @@ Object {
   ],
   "compat": Object {
     "mdn_url": "https://developer.mozilla.org/docs/Web/API/AbortController",
+    "source_file": "api/AbortController.json",
     "spec_url": "https://dom.spec.whatwg.org/#interface-abortcontroller",
     "status": Object {
       "deprecated": false,
-      "experimental": true,
+      "experimental": false,
       "standard_track": true,
     },
     "support": Object {
@@ -172,6 +184,9 @@ Object {
       },
       "chrome_android": Object {
         "version_added": "66",
+      },
+      "deno": Object {
+        "version_added": "1.0",
       },
       "edge": Object {
         "version_added": "16",
@@ -187,6 +202,9 @@ Object {
       },
       "nodejs": Object {
         "version_added": "15.0.0",
+      },
+      "oculus": Object {
+        "version_added": "5.0",
       },
       "opera": Object {
         "version_added": "53",
