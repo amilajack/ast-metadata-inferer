@@ -197,6 +197,9 @@ export function getJsAssertions(
   };
 }
 
+// @hack enable infinity event listener chaining
+process.setMaxListeners(0);
+
 /**
  * @HACK: Tests wont run unless the tests are parallelized across browsers
  *        This is a temporary solution that creates two browser sessions and
@@ -205,15 +208,24 @@ export function getJsAssertions(
 async function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto("https://example.com");
-  const res = await page.evaluate(
-    // eslint-disable-next-line no-eval
-    (compatTest: string) => eval(compatTest),
-    `(function() {
-      return [${tests.join(",")}];
-    })()`
-  );
-  await page.close();
+  let res: T[] = [];
+
+  try {
+    await page.goto("https://example.com");
+    res = await page.evaluate(
+      // eslint-disable-next-line no-eval
+      (compatTest: string) => eval(compatTest),
+      `(function() {
+        return [${tests.join(",")}];
+      })()`
+    );
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await page.close();
+    await browser.close();
+  }
+
   return res;
 }
 
