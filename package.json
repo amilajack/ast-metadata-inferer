@@ -20,7 +20,7 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "build": "rm -rf lib && tsc && npm run metadata && npm run compat && npm run tsc",
+    "build": "rm -rf lib && tsc && npm run metadata && npm run compat",
     "compat": "ts-node ./src/compat.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "metadata": "ts-node ./src/metadata.ts",
