@@ -1,28 +1,7 @@
 {
+  "extends": "@tsconfig/node16",
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "CommonJS",
-    "lib": ["esnext", "dom"],
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "strict": true,
-    "pretty": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    /* Additional Checks */
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-
-    "outDir": "lib",
-
-    /* Module Resolution Options */
-    "moduleResolution": "node",
-    /* This needs to be false so our types are possible to consume without setting this */
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "exclude": ["lib"]
+    "noEmit": true,
+    "resolveJsonModule": true
+  }
 }
