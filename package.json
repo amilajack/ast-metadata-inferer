@@ -34,13 +34,7 @@
     "metadata.json"
   ],
   "devEngines": {
-    "node": ">=10"
-  },
-  "engineStrict": true,
-  "renovate": {
-    "extends": [
-      "bliss"
-    ]
+    "node": ">=16"
   },
   "eslintConfig": {
     "extends": [
