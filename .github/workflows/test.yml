@@ -1,7 +1,17 @@
 name: Test
+<<<<<<< Updated upstream
 
 on: push
 
+=======
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+>>>>>>> Stashed changes
 jobs:
   release:
     runs-on: ubuntu-latest
