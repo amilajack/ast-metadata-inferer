@@ -17,7 +17,7 @@ export default async function Compat(): Promise<ProviderApiMetadata[]> {
     compatDataMap.has(api.protoChainId)
   );
 
-  const compatRecordsFile = path.join(__dirname, "..", "compat.json");
+  const compatRecordsFile = path.join(__dirname, "../compat.json");
   await fs.promises.writeFile(
     compatRecordsFile,
     JSON.stringify(apisWithCompatRecords)
@@ -27,7 +27,11 @@ export default async function Compat(): Promise<ProviderApiMetadata[]> {
 }
 
 if (require.main === module) {
-  Compat().catch((e) => {
-    throw new Error(e);
-  });
+  Compat()
+    .then(() => {
+      process.exit(0);
+    })
+    .catch((e) => {
+      throw new Error(e);
+    });
 }
