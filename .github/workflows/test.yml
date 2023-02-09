@@ -1,7 +1,7 @@
 name: Test
 on: push
 jobs:
-  test:
+  main:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
