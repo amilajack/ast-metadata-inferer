@@ -1,5 +1,5 @@
 /* eslint @typescript-eslint/ban-ts-ignore: off */
-import Nightmare from "nightmare";
+import puppeteer from "puppeteer";
 import { Language, CssApiMetadata, ProviderApiMetadata } from "../types";
 
 function formatJSAssertion(record: ProviderApiMetadata<Language.JS>): string {
@@ -7,7 +7,7 @@ function formatJSAssertion(record: ProviderApiMetadata<Language.JS>): string {
   const formattedStaticProtoChain = record.protoChain.join(".");
   const lowercaseParentObject = record.protoChain[0].toLowerCase();
 
-  const exceptions = new Set(["crypto", "Crypto"]);
+  const exceptions = new Set(["crypto", "Crypto", "Scheduler", "Navigation"]);
 
   const lowercaseTestCondition = String(
     lowercaseParentObject !== "function" &&
@@ -202,41 +202,19 @@ export function getJsAssertions(
  *        This is a temporary solution that creates two browser sessions and
  *        runs tests on them
  */
-function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
-  const middle = Math.floor(tests.length / 2);
-  const config = {
-    // eslint-disable-next-line global-require
-    electronPath: require("electron"),
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-    },
-  };
-
-  return Promise.all([
-    // @ts-ignore
-    Nightmare(config)
-      .goto("https://example.com")
-      .evaluate(
-        // eslint-disable-next-line no-eval
-        (compatTest: string) => eval(compatTest),
-        `(function() {
-          return [${tests.slice(0, middle).join(",")}];
-        })()`
-      )
-      .end(),
-    // @ts-ignore
-    Nightmare(config)
-      .goto("https://example.com")
-      .evaluate(
-        // eslint-disable-next-line no-eval
-        (compatTest: string) => eval(compatTest),
-        `(function() {
-          return [${tests.slice(middle).join(",")}];
-        })()`
-      )
-      .end(),
-  ]).then(([first, second]) => first.concat(second));
+async function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto("https://example.com");
+  const res = await page.evaluate(
+    // eslint-disable-next-line no-eval
+    (compatTest: string) => eval(compatTest),
+    `(function() {
+      return [${tests.join(",")}];
+    })()`
+  );
+  await page.close();
+  return res;
 }
 
 export default async function astMetarataInfererTester(

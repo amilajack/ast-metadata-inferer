@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2018",
     "module": "CommonJS",
-    "lib": ["esnext"],
+    "lib": ["esnext", "dom"],
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
@@ -24,11 +24,5 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "exclude": [
-    "test",
-    "examples",
-    "targets",
-    "**/lib/**/*",
-    "**/tests/**"
-  ]
+  "exclude": ["lib"]
 }
