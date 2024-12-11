@@ -34,9 +34,6 @@
     "compat.json",
     "metadata.json"
   ],
-  "devEngines": {
-    "node": ">=16"
-  },
   "eslintConfig": {
     "extends": [
       "plugin:import/errors",
