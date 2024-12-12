@@ -22,6 +22,11 @@ export default function mdnComaptDataProvider(): ProviderApiMetadata[] {
       name,
       kind: APIKind.Web,
     })),
+    {
+      name: 'WebAssembly',
+      kind: APIKind.ES,
+      ...browserCompatData.webassembly.api
+    },
     ...Object.entries(browserCompatData.javascript.builtins).map(
       ([name, api]) => ({
         ...api,
