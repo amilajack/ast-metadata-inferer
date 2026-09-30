@@ -1,0 +1,48 @@
+name: Data diff
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: head
+      # Built with its own dependencies, so browser and BCD upgrades show up in the diff
+      - name: Check out base
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+      - name: Install Node.js, NPM
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            base/package-lock.json
+            head/package-lock.json
+      # https://pptr.dev/troubleshooting#issues-with-apparmor-on-ubuntu
+      - name: Allow Chrome sandbox
+        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+      - name: Generate base data
+        working-directory: base
+        run: npm ci && npm run compat
+      - name: Generate pull request data
+        working-directory: head
+        run: npm ci && npm run compat
+      - name: Summarize changes
+        run: head/.github/scripts/compat-diff.sh base/compat.json head/compat.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload data
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: compat-json
+          path: |
+            base/compat.json
+            head/compat.json
+          retention-days: 7
