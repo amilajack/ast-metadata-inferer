@@ -90,6 +90,6 @@
     ]
   },
   "dependencies": {
-    "@mdn/browser-compat-data": "^5.6.19"
+    "@mdn/browser-compat-data": "^8.1.3"
   }
 }
