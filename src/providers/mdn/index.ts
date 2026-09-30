@@ -13,6 +13,21 @@ import { ProviderApiMetadata, Language, APIKind } from "../../types";
 //
 // See https://github.com/mdn/browser-compat-data/issues/3425#issuecomment-462176276
 
+// BCD suffixes static members only to keep them apart from prototype members of the same name.
+// See https://github.com/mdn/browser-compat-data/blob/main/docs/data-guidelines/api.md#static-api-members
+const BCD_STATIC_MEMBER_SUFFIX = "_static";
+
+function isStaticMemberKey(key: string): boolean {
+  return key.endsWith(BCD_STATIC_MEMBER_SUFFIX);
+}
+
+function memberName(key: string): string {
+  if (isStaticMemberKey(key)) {
+    return key.slice(0, -BCD_STATIC_MEMBER_SUFFIX.length);
+  }
+  return key;
+}
+
 export default function mdnComaptDataProvider(): ProviderApiMetadata[] {
   const apiMetadata: ProviderApiMetadata[] = [];
 
@@ -49,14 +64,26 @@ export default function mdnComaptDataProvider(): ProviderApiMetadata[] {
     });
 
     // ex. ['alert', 'document', ...]
-    Object.entries(api).forEach(([childName, childApi]) => {
-      const protoChainId = [normalizedApi, childName].join(".");
+    const members = Object.entries(api);
+    const staticMemberNames = new Set(
+      members
+        .map(([key]) => key)
+        .filter(isStaticMemberKey)
+        .map(memberName)
+    );
+    members.forEach(([childName, childApi]) => {
+      const name = memberName(childName);
+      // On a name clash keep the static member: `Response.json` in code is the static access
+      if (!isStaticMemberKey(childName) && staticMemberNames.has(name)) {
+        return;
+      }
+      const protoChainId = [normalizedApi, name].join(".");
       apiMetadata.push({
         id: protoChainId,
-        name: childName,
+        name,
         language: Language.JS,
         kind: api.kind,
-        protoChain: [normalizedApi, childName],
+        protoChain: [normalizedApi, name],
         protoChainId,
         // eslint-disable-next-line no-underscore-dangle
         // @ts-ignore
