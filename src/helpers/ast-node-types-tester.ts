@@ -13,6 +13,8 @@ function formatJSAssertion(record: ProviderApiMetadata<Language.JS>): string {
     "Scheduler",
     "Navigation",
     "Fence",
+    "Origin",
+    "Viewport",
   ]);
 
   const lowercaseTestCondition = String(
