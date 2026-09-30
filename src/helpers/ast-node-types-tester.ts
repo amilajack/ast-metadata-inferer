@@ -7,7 +7,13 @@ function formatJSAssertion(record: ProviderApiMetadata<Language.JS>): string {
   const formattedStaticProtoChain = record.protoChain.join(".");
   const lowercaseParentObject = record.protoChain[0].toLowerCase();
 
-  const exceptions = new Set(["crypto", "Crypto", "Scheduler", "Navigation"]);
+  const exceptions = new Set([
+    "crypto",
+    "Crypto",
+    "Scheduler",
+    "Navigation",
+    "Fence",
+  ]);
 
   const lowercaseTestCondition = String(
     lowercaseParentObject !== "function" &&
@@ -219,8 +225,6 @@ async function parallelizeBrowserTests<T>(tests: string[]): Promise<T[]> {
         return [${tests.join(",")}];
       })()`
     );
-  } catch (e) {
-    console.error(e);
   } finally {
     await page.close();
     await browser.close();
