@@ -6,17 +6,22 @@ on:
   pull_request:
     branches:
       - main
+permissions:
+  contents: read
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Node.js, NPM
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 18
+          node-version: 24
           cache: npm
+      # https://pptr.dev/troubleshooting#issues-with-apparmor-on-ubuntu
+      - name: Allow Chrome sandbox
+        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       - name: npm install
         run: npm ci
       - name: npm test
